@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any
+from urllib.parse import urlparse
 
 from llama_index.core.schema import NodeWithScore
 from openai import OpenAI
@@ -107,6 +108,77 @@ def generate(
             max_tokens=1000,  # bound output cost; plenty for a cited engine answer
         ),
         what="mistral generation",
+    )
+
+    usage = response.usage
+    prompt_tokens = getattr(usage, "prompt_tokens", 0) or 0
+    output_tokens = getattr(usage, "completion_tokens", 0) or 0
+    answer = (response.choices[0].message.content or "").strip()
+
+    return GenerationResult(
+        answer=answer,
+        citations=citations,
+        model=settings.llm_model,
+        prompt_tokens=prompt_tokens,
+        output_tokens=output_tokens,
+    )
+
+
+# Web-only prompt for the "web search" toggle: answer strictly from live web
+# results (Tavily), in the question's language, with a clean refusal if absent.
+_WEB_PROMPT = """\
+You are an assistant for two-stroke engine knowledge, answering from a LIVE WEB SEARCH.
+Answer the QUESTION using ONLY the WEB RESULTS below.
+
+Rules:
+- Base the answer on the web results; do not add facts that aren't in them.
+- Answer in the SAME LANGUAGE as the question (German or English).
+- If the web results don't contain the answer, say so plainly:
+  EN: "I don't have enough information." / DE: "Ich habe nicht genügend Informationen."
+- Be concise and practical.
+
+WEB RESULTS:
+{context}
+
+QUESTION: {question}
+
+ANSWER:"""
+
+
+def generate_web(question: str, results: list) -> GenerationResult:
+    """Generate an answer from live web-search results (web-only mode).
+
+    `results` are ``WebResult``-shaped (title/url/snippet/score). Citations are
+    marked ``source_type="web"`` with the source URL, so the UI renders them
+    distinctly from corpus citations (and they carry no editable `chunk_id`).
+    """
+    context = "\n\n".join(
+        f"[{i + 1}] {r.title} ({r.url})\n{r.snippet}" for i, r in enumerate(results)
+    )
+    citations = [
+        {
+            "chunk_id": "",
+            "source": urlparse(r.url).netloc or r.url,
+            "title": r.title,
+            "score": float(r.score),
+            "snippet": r.snippet[:280],
+            "url": r.url,
+            "source_type": "web",
+        }
+        for r in results
+    ]
+
+    client = _client()
+    response = with_retry(
+        lambda: client.chat.completions.create(
+            model=settings.llm_model,
+            messages=[
+                {"role": "user", "content": _WEB_PROMPT.format(context=context, question=question)}
+            ],
+            temperature=0.1,
+            max_tokens=1000,
+        ),
+        what="mistral web generation",
     )
 
     usage = response.usage

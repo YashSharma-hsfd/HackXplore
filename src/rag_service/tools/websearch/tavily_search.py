@@ -1,30 +1,23 @@
-"""Web-search tool — PLACEHOLDER, intentionally not implemented yet.
+"""Web-search tool — live web retrieval via Tavily (https://docs.tavily.com).
 
-Reserved integration point for an OPTIONAL web-search fallback so the chatbot
-can answer from the live web when the local corpus (graph + RAG) has nothing
-relevant. Default provider: Tavily (https://docs.tavily.com).
+Used by the "web search" toggle on /query: when on, the bot answers from live
+web results instead of the local corpus (web-only mode). Every external call
+goes through ``with_retry`` (retry.py), like the embedding/generation paths,
+so a transient 429/5xx doesn't kill the request.
 
-Why it's a stub: we want the folder/structure reserved now so wiring it later
-is "add the relevant files", not an architecture change. Do NOT build it yet —
-it is tracked as future work in CLAUDE.md §12 (open decisions).
-
-Wiring plan (when we pick it up):
-  1. config.py  → add `tavily_api_key`, `websearch_enabled` (default False),
-     `web_max_results` knobs (pydantic-settings, .env-driven, like every knob).
-  2. implement `web_search()` below → call Tavily through `with_retry`
-     (retry.py), the same wrapper every external call in this repo uses.
-  3. core/pipeline.py → if corpus retrieval is empty / low-confidence AND
-     `websearch_enabled`, call `web_search()` and merge `WebResult`s into the
-     generation context as clearly-labelled WEB citations (kept visually
-     distinct from corpus citations in the UI).
-  4. record cost + latency in the tracker, like the embedding/generation paths.
-
-Until implemented, importing this module is safe; calling `web_search()` raises.
+Requires ``TAVILY_API_KEY`` in .env; until it's set, calling ``web_search``
+raises a clear RuntimeError (the /query route turns that into a 503).
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
+
+from tavily import TavilyClient
+
+from rag_service.config import settings
+from rag_service.retry import with_retry
 
 
 @dataclass
@@ -37,13 +30,32 @@ class WebResult:
     score: float = 0.0
 
 
-def web_search(query: str, max_results: int = 5) -> list[WebResult]:
-    """Return web results for a query. NOT IMPLEMENTED — reserved placeholder.
+@lru_cache(maxsize=1)
+def _client() -> TavilyClient:
+    """Cached Tavily client. Fail loudly if the key is missing rather than
+    letting the SDK emit a confusing auth error mid-request."""
+    if not settings.tavily_api_key:
+        raise RuntimeError(
+            "TAVILY_API_KEY is not set — required for web search. Add it to .env."
+        )
+    return TavilyClient(api_key=settings.tavily_api_key)
 
-    Intended behaviour: query Tavily (wrapped in ``with_retry``) and return a
-    list of ``WebResult``. See the module docstring for the wiring plan.
-    """
-    raise NotImplementedError(
-        "web_search is a reserved placeholder and is not implemented for the "
-        "hackathon. See the module docstring and CLAUDE.md §12."
+
+def web_search(query: str, max_results: int = 5) -> list[WebResult]:
+    """Query Tavily and return ranked web results (wrapped in ``with_retry``)."""
+    client = _client()
+    data = with_retry(
+        lambda: client.search(
+            query=query, max_results=max_results, search_depth="basic"
+        ),
+        what="tavily web search",
     )
+    return [
+        WebResult(
+            title=r.get("title", ""),
+            url=r.get("url", ""),
+            snippet=r.get("content", ""),
+            score=float(r.get("score", 0.0) or 0.0),
+        )
+        for r in data.get("results", [])
+    ]

@@ -87,7 +87,13 @@ def submit_tip(body: TipRequest) -> IngestResponse:
 
 @router.post("/query", response_model=QueryResponse)
 def query(body: QueryRequest) -> QueryResponse:
-    result = query_pipeline(question=body.question, top_k=body.top_k)
+    try:
+        result = query_pipeline(
+            question=body.question, top_k=body.top_k, web_search=body.web_search
+        )
+    except RuntimeError as e:
+        # e.g. web search requested but TAVILY_API_KEY is unset.
+        raise HTTPException(status_code=503, detail=str(e))
     return QueryResponse(**result)
 
 

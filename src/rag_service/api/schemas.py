@@ -43,6 +43,9 @@ class QueryRequest(BaseModel):
     # per-document scoping is required (dropped the old required `document_id`).
     # Default tracks settings.top_k so the .env TOP_K knob is the single source of truth.
     top_k: int = Field(default=settings.top_k, ge=1, le=20)
+    # When true, answer from live web search (Tavily) instead of the local
+    # corpus — the frontend "web search" toggle. Requires TAVILY_API_KEY.
+    web_search: bool = False
 
 
 class Citation(BaseModel):
@@ -54,6 +57,12 @@ class Citation(BaseModel):
     title: str = ""
     score: float = 0.0
     snippet: str = ""
+    # Web citations (from the web-search toggle) carry `source_type="web"` + a
+    # `url`; corpus citations leave these at their defaults. The UI uses
+    # `source_type` to render web hits distinctly (and `chunk_id` is empty for
+    # web, since there's no editable chunk behind them).
+    url: str = ""
+    source_type: str = "corpus"
 
 
 class GraphFact(BaseModel):
