@@ -43,3 +43,7 @@ docker-compose.yml
 # Build artifacts
 build/
 dist/
+
+# Frontend: deps + build output (the Docker frontend stage runs npm ci + build)
+frontend/node_modules/
+frontend/dist/

@@ -1,7 +1,9 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from rag_service.api.routes import router
 from rag_service.config import settings
@@ -21,8 +23,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="RAG-as-a-Service",
-    description="Production RAG API with evaluation pipeline",
+    title="Hirth Knowledge Engine",
+    description="Two-stroke engine knowledge API (hybrid RAG + knowledge graph)",
     version="0.1.0",
     lifespan=lifespan,
 )
@@ -46,3 +48,11 @@ app.add_middleware(
 
 app.add_middleware(RequestLogMiddleware)
 app.include_router(router)
+
+# Serve the built React SPA (frontend/dist, baked into the image by the
+# Dockerfile) at "/". Mounted AFTER the API router so /query, /graph, etc. still
+# resolve to the API; everything else falls through to the SPA. Guarded so local
+# dev without a build present just skips it (run the frontend via `vite` then).
+_FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend_dist"
+if _FRONTEND_DIST.is_dir():
+    app.mount("/", StaticFiles(directory=str(_FRONTEND_DIST), html=True), name="frontend")
