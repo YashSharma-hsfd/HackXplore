@@ -29,6 +29,12 @@ WORKDIR /app
 COPY --from=builder /app/.venv /app/.venv
 COPY --from=builder /app/src /app/src
 
+# Bake the prebuilt corpus (vectors) + knowledge graph into the image so the
+# deployed service answers immediately — HF Spaces has no host volume to mount,
+# so the data must live in the image (kept out of .dockerignore for this).
+COPY chroma_store/ /app/chroma_store/
+COPY graph_store/ /app/graph_store/
+
 ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONPATH="/app/src" \
     PYTHONUNBUFFERED=1

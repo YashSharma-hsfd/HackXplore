@@ -10,8 +10,9 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 
-# Data (regenerable, mounted as volume at runtime)
-chroma_store/
+# Logs. NOTE: chroma_store/ + graph_store/ are intentionally NOT ignored — they
+# are baked into the image (see Dockerfile) so the HF Spaces deploy answers
+# immediately; there's no host volume to mount there.
 *.log
 
 # Secrets — passed via env_file at runtime, never baked into the image
