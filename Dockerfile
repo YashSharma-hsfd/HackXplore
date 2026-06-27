@@ -21,6 +21,17 @@ COPY src/ ./src/
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
+# --- Frontend builder: build the React/Vite app (frontend/) to static files ---
+FROM node:20-slim AS frontend
+WORKDIR /fe
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
+COPY frontend/ ./
+# The SPA is served from this very Space, so point the build at the Space's own
+# URL (its api.js falls back to localhost otherwise; CORS is open regardless).
+ENV VITE_API_URL=https://Avishkar1117-engine.hf.space
+RUN npm run build
+
 # --- Runtime: slim image with only the venv + source ---
 FROM python:3.10-slim AS runtime
 
