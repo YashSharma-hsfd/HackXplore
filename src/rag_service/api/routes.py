@@ -1,7 +1,5 @@
-from pathlib import Path
-
+import chromadb
 from fastapi import APIRouter, File, HTTPException, UploadFile
-from fastapi.responses import HTMLResponse
 
 from rag_service.api.schemas import (
     ChunkEditRequest,
@@ -16,6 +14,7 @@ from rag_service.api.schemas import (
     TipRequest,
 )
 from rag_service.cache.redis_cache import stats as cache_stats
+from rag_service.config import settings
 from rag_service.core import graph, maintenance
 from rag_service.core.ingestion import content_id, ingest_text
 from rag_service.core.loaders import load_bytes, load_url
@@ -24,15 +23,21 @@ from rag_service.observability.cost_tracker import tracker as cost_tracker
 
 router = APIRouter()
 
-# A minimal demo page is served at "/"; the full interactive API stays at "/docs".
-# Read once at import — the file ships in the image (the Dockerfile copies src/).
-_STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
-_INDEX_HTML = (_STATIC_DIR / "index.html").read_text(encoding="utf-8")
 
-
-@router.get("/", include_in_schema=False, response_class=HTMLResponse)
-def root() -> HTMLResponse:
-    return HTMLResponse(_INDEX_HTML)
+@router.get("/corpus/stats")
+def corpus_stats() -> dict:
+    """Count unique source documents and total chunks in the Chroma corpus."""
+    client = chromadb.PersistentClient(path=settings.chroma_persist_dir)
+    collection = client.get_or_create_collection(settings.collection_name)
+    results = collection.get(include=["metadatas"])
+    metadatas = results.get("metadatas") or []
+    sources = {m.get("source") or m.get("document_id", "") for m in metadatas if m}
+    sources.discard("")
+    return {
+        "document_count": len(sources),
+        "chunk_count": len(metadatas),
+        "sources": sorted(sources),
+    }
 
 
 @router.get("/health", response_model=HealthResponse)

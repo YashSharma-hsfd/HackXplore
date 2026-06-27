@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  ::-webkit-scrollbar{ width:9px;height:9px; }
+  ::-webkit-scrollbar-thumb{ background:#d2d8e2;border-radius:5px; }
+  ::-webkit-scrollbar-thumb:hover{ background:#c0c8d4; }
+  ::-webkit-scrollbar-track{ background:transparent; }
+  textarea,input{ font-family:inherit; }
+  textarea::placeholder,input::placeholder{ color:#aab2be; }
+  @keyframes hk-rise{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes hk-fade{ from{ opacity:0; } to{ opacity:1; } }
+</style>
+</helmet>
+
+<div style="position:fixed;inset:0;display:flex;flex-direction:column;background-color:#eef1f7;background-image:radial-gradient(1000px 680px at 82% -12%,rgba(51,88,224,.14),transparent 58%),radial-gradient(760px 520px at -5% 112%,rgba(51,88,224,.09),transparent 60%),linear-gradient(rgba(20,40,90,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(20,40,90,.03) 1px,transparent 1px);background-size:auto,auto,46px 46px,46px 46px;font-family:'Space Grotesk',sans-serif;color:#14181f;overflow:hidden">
+
+  <!-- ===== TOP BAR ===== -->
+  <div style="height:66px;flex:none;display:flex;align-items:center;padding:0 24px;gap:18px;border-bottom:1px solid #e1e5ed;background:rgba(255,255,255,.72);backdrop-filter:blur(10px)">
+    <!-- LOGO -->
+    <div style="display:flex;flex-direction:column;align-items:stretch;line-height:1">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font:800 23px 'Space Grotesk';letter-spacing:.3px;color:#16245e">HIRTH</span>
+        <svg width="40" height="40" viewBox="0 0 46 46" fill="none" style="display:block">
+          <rect x="4" y="4" width="38" height="38" rx="10" fill="#1f4ba8"></rect>
+          <g transform="translate(-2.4,0) skewX(-8)">
+            <rect x="15" y="14" width="5.4" height="18" rx="1.2" fill="#ffffff"></rect>
+            <rect x="25.6" y="14" width="5.4" height="18" rx="1.2" fill="#ffffff"></rect>
+            <rect x="19.6" y="20.4" width="7.4" height="5" fill="#ffffff"></rect>
+            <rect x="25.6" y="17.2" width="5.4" height="1.5" fill="#1f4ba8"></rect>
+            <rect x="25.6" y="21.2" width="5.4" height="1.5" fill="#1f4ba8"></rect>
+            <rect x="25.6" y="25.2" width="5.4" height="1.5" fill="#1f4ba8"></rect>
+          </g>
+        </svg>
+      </div>
+      <span style="font:600 9px 'IBM Plex Mono';letter-spacing:7px;color:#2456b0;margin-top:4px;text-align:right">ENGINES</span>
+    </div>
+    <div style="width:1px;height:26px;background:#dde2ea;margin-left:4px"></div>
+    <span style="font:500 11px 'IBM Plex Mono';color:#98a0ac;letter-spacing:2px">KNOWLEDGE&nbsp;ENGINE</span>
+
+    <!-- NAV -->
+    <div style="margin-left:auto;display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:3px;background:#f3f5f9;border:1px solid #e4e8ef;border-radius:11px;padding:3px">
+        <button onClick="{{ goGraph }}" style="display:flex;align-items:center;gap:7px;border:none;cursor:pointer;border-radius:8px;padding:7px 15px;background:{{ askBg }};color:{{ askColor }};font:600 12px 'Space Grotesk';box-shadow:{{ askShadow }}"><span style="font:600 13px 'IBM Plex Mono'">◈</span>Ask</button>
+        <button onClick="{{ goUpload }}" style="display:flex;align-items:center;gap:7px;border:none;cursor:pointer;border-radius:8px;padding:7px 15px;background:{{ upBg }};color:{{ upColor }};font:600 12px 'Space Grotesk';box-shadow:{{ upShadow }}"><span style="font:600 13px 'IBM Plex Mono'">↑</span>Upload</button>
+      </div>
+      <div style="width:1px;height:22px;background:#dde2ea"></div>
+      <div style="font:500 11px 'IBM Plex Mono';color:#14a08a;display:flex;align-items:center;gap:7px"><span style="width:7px;height:7px;border-radius:50%;background:#14a08a"></span>{{ vsCount }} docs · {{ vsChunks }} vectors</div>
+      <div style="width:32px;height:32px;border-radius:50%;background:#eef1f7;border:1px solid #d6dbe4;display:flex;align-items:center;justify-content:center;font:600 12px 'Space Grotesk';color:#5a626e">RA</div>
+    </div>
+  </div>
+
+  <div style="flex:1;display:flex;min-height:0">
+
+    <!-- ===== MAIN ===== -->
+    <div style="flex:1;position:relative;min-width:0">
+
+      <!-- ============ ASK / ANSWER VIEW ============ -->
+      <sc-if value="{{ isGraph }}" hint-placeholder-val="{{ true }}">
+
+        <!-- EXPLORE HERO -->
+        <sc-if value="{{ isExplore }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 24px 150px;text-align:center;animation:hk-fade .4s ease">
+            <div style="font:500 11px 'IBM Plex Mono';color:#3358e0;letter-spacing:3px">HIRTH KNOWLEDGE ENGINE</div>
+            <div style="font:400 52px/1.1 'Newsreader',serif;color:#14181f;margin-top:18px;max-width:760px;letter-spacing:-0.5px">Ask anything about Hirth <span style="font-style:italic;color:#3358e0">two-stroke</span> engines.</div>
+            <div style="font:400 15px/1.6 'Space Grotesk';color:#5a626e;margin-top:18px;max-width:520px">Grounded answers from your manuals, spec sheets and the live web — every claim traceable to a citation.</div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:30px;max-width:640px">
+              <sc-for list="{{ topics }}" as="t" hint-placeholder-count="8">
+                <button onClick="{{ t.onClick }}" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.85);border:1px solid #e1e5ed;border-radius:30px;padding:9px 15px;cursor:pointer;box-shadow:0 1px 2px rgba(20,30,60,.04)" style-hover="border-color:#3358e0;background:#fff">
+                  <span style="width:8px;height:8px;border-radius:50%;background:{{ t.color }};flex:none"></span>
+                  <span style="font:500 13px 'Space Grotesk';color:#14181f">{{ t.label }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- ANSWER SPLIT -->
+        <sc-if value="{{ isAnswer }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;display:flex;padding:18px;gap:16px;padding-bottom:96px">
+
+            <!-- ANSWER PANEL -->
+            <div style="width:57%;flex:none;height:100%;background:#fff;border:1px solid #e1e5ed;border-radius:16px;display:flex;flex-direction:column;min-width:0;overflow:hidden;box-shadow:0 1px 3px rgba(20,30,60,.05),0 18px 40px -24px rgba(20,30,60,.18);animation:hk-rise .4s ease">
+              <div style="flex:none;display:flex;align-items:flex-start;gap:14px;padding:18px 24px 14px;border-bottom:1px solid #eef0f4">
+                <div style="min-width:0;flex:1">
+                  <div style="font:500 10px 'IBM Plex Mono';color:#aab2be;letter-spacing:1px;text-transform:uppercase">You asked</div>
+                  <div style="font:400 13px 'IBM Plex Mono';color:#5a626e;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ ans.query }}</div>
+                  <div style="display:flex;align-items:center;gap:7px;margin-top:11px;flex-wrap:wrap">
+                    <span style="display:flex;align-items:center;gap:6px;font:500 11px 'IBM Plex Mono';color:#5a626e;background:#f3f5f9;border:1px solid #e4e8ef;padding:4px 9px;border-radius:7px"><span style="color:#3358e0">↯</span>{{ ans.latency }} <span style="color:#aab2be">latency</span></span>
+                    <span style="display:flex;align-items:center;gap:6px;font:500 11px 'IBM Plex Mono';color:#5a626e;background:#f3f5f9;border:1px solid #e4e8ef;padding:4px 9px;border-radius:7px"><span style="color:#14a08a">$</span>{{ ans.cost }} <span style="color:#aab2be">cost</span></span>
+                    <span style="display:flex;align-items:center;gap:6px;font:600 10px 'IBM Plex Mono';color:{{ ans.modeColor }};background:{{ ans.modeBg }};border:1px solid {{ ans.modeBorder }};padding:4px 9px;border-radius:7px">{{ ans.modeIcon }} {{ ans.modeLabel }}</span>
+                  </div>
+                </div>
+                <button onClick="{{ openReview }}" style="flex:none;display:flex;align-items:center;gap:7px;background:#f3f5f9;border:1px solid #d6dbe4;color:#14181f;font:600 12px 'Space Grotesk';padding:8px 14px;border-radius:9px;cursor:pointer" style-hover="border-color:#3358e0;color:#3358e0">⟳ Review &amp; update</button>
+              </div>
+              <div style="flex:1;overflow-y:auto;padding:20px 24px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="width:9px;height:9px;border-radius:50%;background:{{ ans.color }}"></span>
+                  <span style="font:600 10px 'IBM Plex Mono';color:{{ ans.color }};letter-spacing:1px;text-transform:uppercase">{{ ans.cat }}</span>
+                  <span style="margin-left:auto;font:500 11px 'IBM Plex Mono';color:#aab2be">updated {{ ans.updated }}</span>
+                </div>
+                <div style="font:500 32px/1.18 'Newsreader',serif;color:#14181f;margin-top:12px;letter-spacing:-0.3px">{{ ans.label }}</div>
+                <div style="display:flex;align-items:center;gap:9px;margin-top:14px;padding:9px 12px;border-radius:10px;background:{{ ans.bannerBg }};border:1px solid {{ ans.bannerBorder }}">
+                  <span style="font:600 11px 'IBM Plex Mono';color:{{ ans.modeColor }}">{{ ans.modeIcon }}</span>
+                  <span style="font:400 12px 'Space Grotesk';color:#5a626e">{{ ans.banner }}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;margin-top:16px">
+                  <span style="font:600 10px 'IBM Plex Mono';color:#aab2be;letter-spacing:1px">CONFIDENCE</span>
+                  <div style="flex:1;max-width:220px;height:6px;background:#e9ecf2;border-radius:4px;overflow:hidden"><div style="height:100%;width:{{ ans.confW }};background:linear-gradient(90deg,#3358e0,#4a6cf0);border-radius:4px"></div></div>
+                  <span style="font:600 12px 'IBM Plex Mono';color:#14181f">{{ ans.confW }}</span>
+                </div>
+                <div style="font:400 15.5px/1.72 'Newsreader',serif;color:#39414e;margin-top:18px">{{ ans.body }}</div>
+                <div style="font:600 10px 'IBM Plex Mono';color:#aab2be;letter-spacing:1px;margin-top:24px;margin-bottom:11px">{{ ans.sourcesLabel }}</div>
+                <sc-for list="{{ ans.sources }}" as="s" hint-placeholder-count="2">
+                  <sc-if value="{{ s.isDoc }}" hint-placeholder-val="{{ true }}">
+                    <div style="display:flex;align-items:center;gap:11px;background:#f7f8fb;border:1px solid #e4e8ef;border-radius:10px;padding:11px 13px;margin-bottom:8px">
+                      <div style="width:26px;height:26px;border-radius:7px;background:#eef1f7;border:1px solid #dde2ea;display:flex;align-items:center;justify-content:center;font:600 9px 'IBM Plex Mono';color:#7a818c;flex:none">PDF</div>
+                      <span style="font:500 13px 'Space Grotesk';color:#14181f;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ s.doc }}</span>
+                      <span style="font:500 10px 'IBM Plex Mono';color:#98a0ac">{{ s.page }}</span>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ s.isWeb }}" hint-placeholder-val="{{ false }}">
+                    <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:11px;background:#f4f7fd;border:1px solid #d9e2f7;border-radius:10px;padding:11px 13px;margin-bottom:8px;text-decoration:none" style-hover="border-color:#3358e0">
+                      <div style="width:26px;height:26px;border-radius:7px;background:#e7eefb;border:1px solid #cfdcf7;display:flex;align-items:center;justify-content:center;font:600 9px 'IBM Plex Mono';color:#3358e0;flex:none">WEB</div>
+                      <span style="font:500 13px 'Space Grotesk';color:#14181f;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ s.doc }}</span>
+                      <span style="font:600 11px 'Space Grotesk';color:#3358e0">open ↗</span>
+                    </a>
+                  </sc-if>
+                </sc-for>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:16px;animation:hk-rise .5s ease">
+              <!-- RELATED DOMAINS -->
+              <div style="flex:none;background:#fff;border:1px solid #e1e5ed;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(20,30,60,.05)">
+                <div style="display:flex;align-items:center;gap:9px;padding:13px 16px;border-bottom:1px solid #eef0f4">
+                  <span style="font:600 12px 'Space Grotesk';color:#14181f">Related domains</span>
+                  <span style="font:400 10px 'IBM Plex Mono';color:#aab2be">connected to this answer</span>
+                </div>
+                <div style="padding:8px">
+                  <sc-for list="{{ related }}" as="r" hint-placeholder-count="5">
+                    <button onClick="{{ r.onClick }}" style="width:100%;display:flex;align-items:center;gap:10px;background:transparent;border:none;border-radius:9px;padding:9px 10px;cursor:pointer;text-align:left" style-hover="background:#f3f5f9">
+                      <span style="width:9px;height:9px;border-radius:50%;background:{{ r.color }};flex:none"></span>
+                      <span style="font:500 13px 'Space Grotesk';color:#14181f;flex:1">{{ r.label }}</span>
+                      <span style="font:500 10px 'IBM Plex Mono';color:#aab2be">{{ r.confLabel }}</span>
+                      <span style="font:500 13px 'IBM Plex Mono';color:#cbd2dc">→</span>
+                    </button>
+                  </sc-for>
+                </div>
+              </div>
+              <!-- AROUND THE WEB -->
+              <div style="flex:1;min-height:0;background:#fff;border:1px solid #e1e5ed;border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 1px 3px rgba(20,30,60,.05)">
+                <div style="flex:none;display:flex;align-items:center;gap:9px;padding:13px 16px;border-bottom:1px solid #eef0f4">
+                  <span style="font:600 12px 'Space Grotesk';color:#14181f">Around the Web</span>
+                  <span style="font:400 10px 'IBM Plex Mono';color:#aab2be">live signals</span>
+                  <span style="margin-left:auto;font:500 9px 'IBM Plex Mono';color:{{ ans.webChipColor }};background:{{ ans.webChipBg }};border:1px solid {{ ans.webChipBorder }};padding:3px 7px;border-radius:5px">{{ ans.webChip }}</span>
+                </div>
+                <div style="flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:8px">
+                  <sc-for list="{{ webItems }}" as="w" hint-placeholder-count="6">
+                    <a href="{{ w.url }}" target="_blank" rel="noopener noreferrer" style="display:flex;gap:11px;align-items:flex-start;background:#f7f8fb;border:1px solid #e4e8ef;border-left:2px solid {{ w.color }};border-radius:10px;padding:11px 13px;text-decoration:none" style-hover="border-color:#cfd5df;background:#f1f4f9">
+                      <div style="flex:1;min-width:0">
+                        <div style="display:flex;align-items:center;gap:8px"><span style="font:600 9px 'IBM Plex Mono';color:{{ w.color }};letter-spacing:.5px">{{ w.tag }}</span><span style="font:400 10px 'IBM Plex Mono';color:#aab2be">{{ w.source }} · {{ w.date }}</span></div>
+                        <div style="font:500 13px/1.4 'Space Grotesk';color:#14181f;margin-top:4px">{{ w.title }}</div>
+                      </div>
+                      <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:5px"><span style="font:500 10px 'IBM Plex Mono';color:#98a0ac">{{ w.rel }}</span><span style="font:600 11px 'Space Grotesk';color:#3358e0">open ↗</span></div>
+                    </a>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <!-- QUERY BAR -->
+        <div style="position:absolute;left:0;right:0;bottom:0;z-index:30;display:flex;flex-direction:column;align-items:center;padding:0 18px 22px;pointer-events:none">
+          <div style="pointer-events:auto;width:100%;max-width:740px;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid {{ barBorder }};border-radius:14px;padding:8px 8px 8px 12px;box-shadow:0 18px 50px -20px rgba(20,30,60,.30),{{ barRing }}">
+            <button onClick="{{ addPlus }}" title="Add documents to the vector space" style="flex:none;width:38px;height:38px;border-radius:10px;background:#f3f5f9;border:1px solid #d6dbe4;color:#5a626e;font:400 22px 'IBM Plex Mono';cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="border-color:#3358e0;color:#3358e0">+</button>
+            <button onClick="{{ toggleWeb }}" title="Answer from the live web instead of your knowledge base" style="flex:none;height:38px;padding:0 12px;border-radius:10px;background:{{ webBtnBg }};border:1px solid {{ webBtnBorder }};color:{{ webBtnColor }};cursor:pointer;display:flex;align-items:center;gap:7px">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.7 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.7-4-9s1.4-6.5 4-9z"></path></svg>
+              <span style="font:600 11px 'Space Grotesk'">{{ webBtnLabel }}</span>
+            </button>
+            <input value="{{ query }}" onChange="{{ onQueryInput }}" onKeyDown="{{ onQueryKey }}" placeholder="{{ placeholder }}" style="flex:1;background:transparent;border:none;outline:none;color:#14181f;font:400 15px 'Space Grotesk';min-width:0" />
+            <sc-if value="{{ isAnswer }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ askNew }}" style="flex:none;height:38px;padding:0 13px;border-radius:10px;background:#f3f5f9;border:1px solid #d6dbe4;color:#5a626e;font:500 12px 'Space Grotesk';cursor:pointer">Clear</button>
+            </sc-if>
+            <button onClick="{{ submitQuery }}" style="flex:none;width:38px;height:38px;border-radius:10px;background:#3358e0;border:none;color:#fff;font:600 17px 'IBM Plex Mono';cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#4a6cf0">→</button>
+          </div>
+        </div>
+
+        <!-- REVIEW OVERLAY -->
+        <sc-if value="{{ reviewOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;z-index:50;background:rgba(20,30,60,.30);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:26px">
+            <div style="width:100%;max-width:1100px;height:100%;max-height:680px;background:#fff;border:1px solid #e1e5ed;border-radius:18px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 40px 100px -30px rgba(20,30,60,.45);animation:hk-rise .25s ease">
+              <div style="flex:none;display:flex;align-items:center;padding:16px 20px;border-bottom:1px solid #eef0f4">
+                <div><div style="font:600 14px 'Space Grotesk';color:#14181f">Review &amp; update answer</div><div style="font:400 11px 'IBM Plex Mono';color:#98a0ac">{{ ans.label }} · contributes to the vector space</div></div>
+                <button onClick="{{ closeReview }}" style="margin-left:auto;width:32px;height:32px;border-radius:8px;background:#f3f5f9;border:1px solid #d6dbe4;color:#5a626e;font:400 16px 'IBM Plex Mono';cursor:pointer">✕</button>
+              </div>
+              <div style="flex:1;display:flex;min-height:0">
+                <div style="flex:1;min-width:0;border-right:1px solid #eef0f4;padding:22px 24px;overflow-y:auto">
+                  <div style="font:600 10px 'IBM Plex Mono';color:#aab2be;letter-spacing:1px">CURRENT ANSWER</div>
+                  <div style="display:flex;align-items:center;gap:8px;margin-top:12px"><span style="width:9px;height:9px;border-radius:50%;background:{{ ans.color }}"></span><span style="font:600 10px 'IBM Plex Mono';color:{{ ans.color }};letter-spacing:1px;text-transform:uppercase">{{ ans.cat }}</span></div>
+                  <div style="font:500 26px/1.2 'Newsreader',serif;color:#14181f;margin-top:10px">{{ ans.label }}</div>
+                  <div style="font:400 15px/1.7 'Newsreader',serif;color:#39414e;margin-top:16px">{{ ans.body }}</div>
+                  <div style="margin-top:18px;display:flex;gap:8px;flex-wrap:wrap"><span style="font:500 10px 'IBM Plex Mono';color:#5a626e;background:#f3f5f9;border:1px solid #e4e8ef;padding:5px 9px;border-radius:6px">{{ ans.confW }} confidence</span><span style="font:500 10px 'IBM Plex Mono';color:#5a626e;background:#f3f5f9;border:1px solid #e4e8ef;padding:5px 9px;border-radius:6px">v4 · J. Okafor</span></div>
+                </div>
+                <div style="flex:1;min-width:0;padding:22px 24px;display:flex;flex-direction:column">
+                  <div style="font:600 10px 'IBM Plex Mono';color:#3358e0;letter-spacing:1px">YOUR UPDATE</div>
+                  <sc-if value="{{ reviewDone }}" hint-placeholder-val="{{ false }}">
+                    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px">
+                      <div style="width:64px;height:64px;border-radius:50%;background:rgba(20,160,138,.10);border:1px solid #14a08a;display:flex;align-items:center;justify-content:center;font:400 30px 'IBM Plex Mono';color:#14a08a">✓</div>
+                      <div style="font:500 20px 'Newsreader',serif;color:#14181f">Vector space updated</div>
+                      <div style="font:400 13px/1.6 'Space Grotesk';color:#5a626e;max-width:300px">Your revision was embedded and the answer re-indexed. Confidence rose to <span style="color:#14a08a">96%</span> · published as v5.</div>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ reviewEditing }}" hint-placeholder-val="{{ true }}">
+                    <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+                      <div style="font:400 12px/1.5 'Space Grotesk';color:#5a626e;margin-top:10px;margin-bottom:10px">Have a better or more current answer? Add it below. It will be embedded into the vector space and used for future retrievals.</div>
+                      <textarea value="{{ reviewText }}" onChange="{{ onReviewInput }}" placeholder="e.g. The returning compression wave also packs escaping fresh charge back past the exhaust port — clarify that chamber length is tuned to peak-power RPM…" style="flex:1;min-height:0;resize:none;background:#f7f8fb;border:1px solid #d6dbe4;border-radius:11px;padding:13px 14px;color:#14181f;font:400 14px/1.6 'Space Grotesk';outline:none"></textarea>
+                      <div style="display:flex;gap:7px;margin-top:11px;flex-wrap:wrap"><span style="font:500 10px 'IBM Plex Mono';color:#5a626e;background:#f3f5f9;border:1px solid #d6dbe4;padding:6px 10px;border-radius:7px;cursor:pointer">＋ Cite source</span><span style="font:500 10px 'IBM Plex Mono';color:#5a626e;background:#f3f5f9;border:1px solid #d6dbe4;padding:6px 10px;border-radius:7px;cursor:pointer">⎘ Attach document</span><span style="font:500 10px 'IBM Plex Mono';color:#5a626e;background:#f3f5f9;border:1px solid #d6dbe4;padding:6px 10px;border-radius:7px;cursor:pointer">↗ Link web signal</span></div>
+                      <div style="display:flex;align-items:center;gap:11px;margin-top:14px">
+                        <button onClick="{{ submitReview }}" style="flex:1;height:44px;border-radius:11px;background:#3358e0;border:none;color:#fff;font:600 13px 'Space Grotesk';cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px" style-hover="background:#4a6cf0">Update vector space</button>
+                        <button onClick="{{ closeReview }}" style="flex:none;height:44px;padding:0 18px;border-radius:11px;background:#f3f5f9;border:1px solid #d6dbe4;color:#5a626e;font:600 12px 'Space Grotesk';cursor:pointer">Cancel</button>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <!-- ============ UPLOAD VIEW ============ -->
+      <sc-if value="{{ isUpload }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;overflow-y:auto;padding:32px 40px">
+          <div style="max-width:860px;margin:0 auto">
+            <div style="font:500 30px 'Newsreader',serif;color:#14181f;letter-spacing:-0.3px">Vector space</div>
+            <div style="font:400 13px 'Space Grotesk';color:#5a626e;margin-top:6px">Add manuals, spec sheets and notes. Every document is chunked and embedded so Hirth can retrieve and cite it.</div>
+            <div style="display:flex;gap:14px;margin-top:22px">
+              <div style="flex:1;background:#fff;border:1px solid #e1e5ed;border-radius:12px;padding:18px;box-shadow:0 1px 3px rgba(20,30,60,.05)"><div style="font:700 26px 'Space Grotesk';color:#14181f">{{ vsCount }}</div><div style="font:400 11px 'Space Grotesk';color:#5a626e;margin-top:2px">documents</div></div>
+              <div style="flex:1;background:#fff;border:1px solid #e1e5ed;border-radius:12px;padding:18px;box-shadow:0 1px 3px rgba(20,30,60,.05)"><div style="font:700 26px 'Space Grotesk';color:#3358e0">{{ vsChunks }}</div><div style="font:400 11px 'Space Grotesk';color:#5a626e;margin-top:2px">embedded vectors</div></div>
+              <div style="flex:1;background:#fff;border:1px solid #e1e5ed;border-radius:12px;padding:18px;box-shadow:0 1px 3px rgba(20,30,60,.05)"><div style="font:700 26px 'Space Grotesk';color:#14a08a">{{ vsFresh }}</div><div style="font:400 11px 'Space Grotesk';color:#5a626e;margin-top:2px">indexed &amp; fresh</div></div>
+            </div>
+            <label style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin-top:18px;height:180px;border:1.5px dashed #cfd5df;border-radius:14px;background:#f7f8fb;cursor:pointer" style-hover="border-color:#3358e0;background:#f1f5fd">
+              <div style="width:52px;height:52px;border-radius:13px;background:#fff;border:1px solid #d6dbe4;display:flex;align-items:center;justify-content:center;font:300 28px 'IBM Plex Mono';color:#3358e0">↑</div>
+              <div style="font:500 15px 'Space Grotesk';color:#14181f">Drop documents or click to browse</div>
+              <div style="font:400 11px 'IBM Plex Mono';color:#98a0ac">PDF · DOCX · XLSX · TXT — added to the vector space on upload</div>
+              <input type="file" multiple onChange="{{ onFiles }}" style="display:none" />
+            </label>
+            <div style="font:600 10px 'IBM Plex Mono';color:#aab2be;letter-spacing:1px;margin-top:26px;margin-bottom:12px">INDEXED DOCUMENTS</div>
+            <div style="display:flex;flex-direction:column;gap:9px;padding-bottom:30px">
+              <sc-for list="{{ docs }}" as="d" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:13px;background:#fff;border:1px solid #e1e5ed;border-radius:11px;padding:13px 15px;box-shadow:0 1px 2px rgba(20,30,60,.04)">
+                  <div style="width:34px;height:34px;border-radius:8px;background:#f3f5f9;border:1px solid #e4e8ef;display:flex;align-items:center;justify-content:center;font:600 9px 'IBM Plex Mono';color:#7a818c;flex:none">{{ d.ext }}</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font:500 13px 'Space Grotesk';color:#14181f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ d.name }}</div>
+                    <div style="display:flex;align-items:center;gap:10px;margin-top:5px">
+                      <span style="font:400 10px 'IBM Plex Mono';color:#98a0ac">{{ d.size }}</span>
+                      <div style="flex:1;max-width:160px;height:4px;background:#e9ecf2;border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ d.progW }};background:{{ d.progColor }};border-radius:3px;transition:width .4s ease"></div></div>
+                    </div>
+                  </div>
+                  <span style="flex:none;font:600 10px 'IBM Plex Mono';color:{{ d.statusColor }};background:{{ d.statusBg }};border:1px solid {{ d.statusBorder }};padding:4px 9px;border-radius:6px">{{ d.statusLabel }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:50%;bottom:96px;transform:translateX(-50%);z-index:80;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #14a08a;border-radius:11px;padding:12px 18px;box-shadow:0 18px 50px -16px rgba(20,30,60,.30);animation:hk-rise .3s ease">
+      <span style="width:18px;height:18px;border-radius:50%;background:rgba(20,160,138,.14);border:1px solid #14a08a;display:flex;align-items:center;justify-content:center;font:400 11px 'IBM Plex Mono';color:#14a08a">✓</span>
+      <span style="font:500 13px 'Space Grotesk';color:#14181f">{{ toast }}</span>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    view: 'graph', mode: 'explore',
+    query: '', submittedQuery: '',
+    selected: 'exhaust',
+    reviewOpen: false, reviewDone: false, reviewText: '',
+    webMode: false,
+    toast: null,
+    docs: [
+      { id: 1, name: 'RX-250 Service Manual.pdf', size: '4.2 MB', status: 'indexed', prog: 100 },
+      { id: 2, name: 'Pipe Tuning Guide v3.pdf', size: '1.8 MB', status: 'indexed', prog: 100 },
+      { id: 3, name: 'Jetting Chart - altitude.xlsx', size: '320 KB', status: 'indexed', prog: 100 }
+    ]
+  };
+
+  data() {
+    const C = { combustion: '#3358e0', fuel: '#1f9bd1', ignition: '#d98a1f', cooling: '#18a08a', oil: '#6b7384' };
+    const L = { combustion: 'Combustion', fuel: 'Intake / Fuel', ignition: 'Ignition', cooling: 'Cooling', oil: 'Lubrication' };
+    const N = [
+      { id: 'cycle', label: '2-Stroke Cycle', cat: 'combustion', conf: 97, web: 2, updated: 'Jun 20',
+        sources: [{ d: 'Hirth Engineering Fundamentals', p: '§1' }],
+        blurb: 'The two-stroke cycle completes intake, compression, power and exhaust in a single crankshaft revolution using port timing rather than poppet valves — doubling the number of power strokes for a given displacement versus a four-stroke.' },
+      { id: 'carb', label: 'Carburetor', cat: 'fuel', conf: 88, web: 9, updated: 'Jun 25',
+        sources: [{ d: 'RX-250 Jetting Chart', p: 'p.3' }, { d: 'Mikuni TM Tuning Notes', p: '§2' }],
+        blurb: 'Jetting sets the air-fuel ratio across the throttle range — the pilot jet for idle, the needle for the midrange and the main jet for wide-open throttle. Altitude and air temperature both shift the optimal jet sizes.' },
+      { id: 'afr', label: 'Air-Fuel Ratio', cat: 'fuel', conf: 87, web: 6, updated: 'Jun 21',
+        sources: [{ d: 'AFR & EGT Study', p: '§2' }],
+        blurb: 'The target air-fuel ratio balances power against thermal margin — a richer mixture cools and protects, while a leaner one makes more power but raises detonation risk. Read it from spark-plug colour and exhaust-gas temperature.' },
+      { id: 'reed', label: 'Reed Valve', cat: 'fuel', conf: 90, web: 3, updated: 'Jun 22',
+        sources: [{ d: 'Intake System Manual', p: '§4' }],
+        blurb: 'The reed valve is a one-way check valve in the intake tract that blocks reverse flow during crankcase compression, sharpening low-end throttle response and widening the usable powerband.' },
+      { id: 'premix', label: 'Premix & Lubrication', cat: 'oil', conf: 93, web: 8, updated: 'Jun 25',
+        sources: [{ d: 'Oil Ratio Spec Sheet', p: 'p.2' }, { d: 'Synthetic vs Castor Study', p: '§4' }],
+        blurb: 'Two-strokes lubricate via oil premixed into the fuel. The ratio (for example 32:1) trades engine protection against plug fouling and visible smoke; modern synthetics allow leaner mixes without sacrificing protection.' },
+      { id: 'crank', label: 'Crankcase Compression', cat: 'combustion', conf: 89, web: 2, updated: 'Jun 23',
+        sources: [{ d: 'Bottom-End Rebuild Manual', p: '§6' }],
+        blurb: 'The sealed crankcase acts as the primary pump of a two-stroke; its compression ratio drives transfer efficiency. Any air leak leans the mixture and risks a seizure, which is why case sealing is checked first when tuning.' },
+      { id: 'transfer', label: 'Transfer Ports', cat: 'combustion', conf: 88, web: 4, updated: 'Jun 18',
+        sources: [{ d: 'Cylinder Porting Guide', p: '§3' }],
+        blurb: 'Transfer ports route the compressed charge from the crankcase up into the cylinder. Their angle and timing aim the incoming stream to scavenge cleanly without short-circuiting straight out of the exhaust port.' },
+      { id: 'piston', label: 'Piston & Rings', cat: 'combustion', conf: 90, web: 1, updated: 'Jun 06',
+        sources: [{ d: 'Top-End Service Manual', p: '§5' }],
+        blurb: 'Piston and ring condition govern sealing and heat transfer. Two-stroke pistons run locating pins to stop the rings rotating past the ports; ring end-gap is set to the bore size and expected thermal expansion.' },
+      { id: 'port', label: 'Port Timing', cat: 'combustion', conf: 87, web: 7, updated: 'Jun 26',
+        sources: [{ d: 'Cylinder Porting Guide', p: '§2' }, { d: 'Powerband Tuning', p: 'p.19' }],
+        blurb: 'Port timing — the open and close angles of the intake, transfer and exhaust ports — defines the engine\u2019s character. Raising the exhaust port lifts peak power but narrows the usable band, so it is matched to how the engine is used.' },
+      { id: 'exhaust', label: 'Expansion Chamber', cat: 'combustion', conf: 92, web: 6, updated: 'Jun 24',
+        sources: [{ d: 'RX-250 Service Manual', p: '§7' }, { d: 'Pipe Tuning Guide v3', p: 'p.42' }, { d: 'Two-Stroke Tuners Handbook', p: 'ch.5' }],
+        blurb: 'The tuned expansion chamber uses reflected pressure waves to scavenge spent gas and then pack escaping fresh charge back past the exhaust port before it closes. Chamber geometry is tuned to a target RPM band — typically the engine\u2019s peak-power RPM — so the returning compression wave arrives exactly as the port shuts.' },
+      { id: 'cooling', label: 'Cooling', cat: 'cooling', conf: 86, web: 3, updated: 'Jun 19',
+        sources: [{ d: 'Liquid-Cooling System Manual', p: '§1' }],
+        blurb: 'Liquid cooling stabilises cylinder temperature and detonation margin on performance two-strokes. Head temperature directly sets how much ignition advance is safe, so coolant flow is part of the tuning picture, not just maintenance.' },
+      { id: 'ignition', label: 'Ignition Timing', cat: 'ignition', conf: 85, web: 5, updated: 'Jun 21',
+        sources: [{ d: 'CDI Mapping Notes', p: '§3' }, { d: 'Octane & Advance Study', p: 'p.8' }],
+        blurb: 'Ignition advance is mapped against RPM: too much risks detonation, too little sacrifices power. CDI curves are matched to the fuel octane and combustion-chamber shape, and retarded slightly when running lean or hot.' },
+      { id: 'deto', label: 'Detonation', cat: 'ignition', conf: 90, web: 5, updated: 'Jun 23',
+        sources: [{ d: 'Detonation Failure Atlas', p: '§1' }],
+        blurb: 'Detonation is uncontrolled end-gas auto-ignition that hammers the piston crown. It is driven by heat, a lean mixture, low octane and excess advance — the failure mode every tune is built to avoid, and the reason for conservative margins.' },
+      { id: 'plug', label: 'Spark Plug', cat: 'ignition', conf: 91, web: 4, updated: 'Jun 13',
+        sources: [{ d: 'Plug Heat Range Chart', p: 'p.1' }],
+        blurb: 'Spark-plug heat range must match the engine\u2019s thermal load — too cold and it fouls at low load, too hot and it invites pre-ignition. Electrode colour is the classic field diagnostic for mixture and timing.' }
+    ];
+    const E = [
+      ['cycle','carb'],['cycle','reed'],['cycle','port'],['cycle','piston'],['cycle','crank'],['cycle','exhaust'],['cycle','ignition'],['cycle','cooling'],['cycle','premix'],['cycle','transfer'],
+      ['carb','afr'],['carb','reed'],['afr','reed'],['reed','crank'],['premix','crank'],['premix','piston'],
+      ['crank','piston'],['crank','transfer'],['transfer','port'],['transfer','piston'],['port','exhaust'],['port','piston'],
+      ['exhaust','cooling'],['exhaust','deto'],['ignition','plug'],['ignition','deto'],['ignition','piston'],['cooling','piston']
+    ];
+    const WEB = [
+      { url:'https://www.epa.gov/regulations-emissions-vehicles-and-engines', source:'Federal Register', date:'Jun 24', tag:'REGULATION', color:'#d98a1f', title:'2026 small-engine evaporative emissions rule finalized', rel:'96%' },
+      { url:'https://www.sae.org/publications/technical-papers', source:'SAE Technical Paper', date:'Jun 12', tag:'RESEARCH', color:'#18a08a', title:'Pressure-wave scavenging efficiency in tuned two-stroke exhausts', rel:'90%' },
+      { url:'https://www.thumpertalk.com', source:'ThumperTalk', date:'Jun 22', tag:'FORUM', color:'#1f9bd1', title:'Expansion chamber length vs. peak RPM — 40-page dyno thread', rel:'88%' },
+      { url:'https://hirthengines.com/support', source:'Hirth Support', date:'Jun 08', tag:'OEM DOC', color:'#3358e0', title:'Service bulletin: exhaust header torque spec update', rel:'94%' },
+      { url:'https://mikuni.com', source:'Mikuni Tech Bulletin', date:'Jun 19', tag:'SUPPLIER', color:'#1f9bd1', title:'TMX carburetor needle profile revision (rev. C)', rel:'81%' },
+      { url:'https://www.reddit.com/r/2stroke', source:'r/2stroke', date:'Jun 10', tag:'FORUM', color:'#1f9bd1', title:'Did the new pipe taper actually change the powerband?', rel:'72%' }
+    ];
+    return { C, L, N, E, WEB };
+  }
+
+  matchQuery(q) {
+    const s = q.toLowerCase();
+    const map = [['expansion','exhaust'],['chamber','exhaust'],['scaveng','exhaust'],['exhaust','exhaust'],['pipe','exhaust'],
+      ['jet','carb'],['carb','carb'],['air-fuel','afr'],['air fuel','afr'],['mixture','afr'],['ratio','afr'],['fuel','afr'],
+      ['reed','reed'],['premix','premix'],['lubric','premix'],['oil','premix'],
+      ['crank','crank'],['ring','piston'],['piston','piston'],['transfer','transfer'],['timing','port'],['port','port'],
+      ['spark','plug'],['plug','plug'],['detonat','deto'],['knock','deto'],['ignition','ignition'],
+      ['cool','cooling'],['two-stroke','cycle'],['2-stroke','cycle'],['cycle','cycle']];
+    for (const [k, id] of map) { if (s.includes(k)) return id; }
+    return 'cycle';
+  }
+
+  fmtSize(b) { if (b > 1048576) return (b / 1048576).toFixed(1) + ' MB'; if (b > 1024) return Math.round(b / 1024) + ' KB'; return b + ' B'; }
+  extOf(name) { const p = (name || '').split('.'); return (p.length > 1 ? p[p.length - 1] : 'doc').slice(0, 4).toUpperCase(); }
+
+  onQueryInput = (e) => this.setState({ query: e.target.value });
+  onQueryKey = (e) => { if (e.key === 'Enter') this.submitQuery(); };
+  submitQuery = () => {
+    const q = (this.state.query || '').trim();
+    if (!q) return;
+    this.setState({ mode: 'answer', submittedQuery: q, selected: this.matchQuery(q) });
+  };
+  askTopic = (id) => {
+    const n = this.data().N.find(x => x.id === id);
+    this.setState({ mode: 'answer', selected: id, submittedQuery: 'Tell me about ' + (n ? n.label.toLowerCase() : id), query: '' });
+  };
+  selectNode = (id) => this.setState({ selected: id });
+  askNew = () => this.setState({ mode: 'explore', submittedQuery: '', query: '', reviewOpen: false });
+  toggleWeb = () => this.setState(s => ({ webMode: !s.webMode }));
+
+  openReview = () => this.setState({ reviewOpen: true, reviewDone: false, reviewText: '' });
+  closeReview = () => this.setState({ reviewOpen: false, reviewDone: false, reviewText: '' });
+  onReviewInput = (e) => this.setState({ reviewText: e.target.value });
+  submitReview = () => {
+    this.setState({ reviewDone: true, toast: 'Vector space updated · answer re-embedded' });
+    setTimeout(() => this.setState({ reviewOpen: false, reviewDone: false, reviewText: '' }), 1900);
+    setTimeout(() => this.setState({ toast: null }), 3400);
+  };
+
+  goGraph = () => this.setState({ view: 'graph' });
+  goUpload = () => this.setState({ view: 'upload' });
+  addPlus = () => this.setState({ view: 'upload' });
+  updateDoc(id, patch) { this.setState(s => ({ docs: s.docs.map(d => d.id === id ? Object.assign({}, d, patch) : d) })); }
+  onFiles = (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    const add = files.map(f => ({ id: 'u' + Date.now() + Math.random().toString(36).slice(2, 6), name: f.name, size: this.fmtSize(f.size), status: 'processing', prog: 15 }));
+    this.setState(s => ({ docs: s.docs.concat(add), view: 'upload', toast: files.length + ' document' + (files.length > 1 ? 's' : '') + ' added — embedding…' }));
+    add.forEach((d, i) => {
+      setTimeout(() => this.updateDoc(d.id, { prog: 60 }), 500 + i * 120);
+      setTimeout(() => { this.updateDoc(d.id, { status: 'indexed', prog: 100 }); this.setState({ toast: 'Vector space updated · ' + d.name + ' indexed' }); }, 1400 + i * 260);
+    });
+    setTimeout(() => this.setState({ toast: null }), 3600 + files.length * 260);
+    e.target.value = '';
+  };
+
+  renderVals() {
+    const { C, L, N, E, WEB } = this.data();
+    const st = this.state;
+    const sel = st.selected, web = st.webMode;
+    const isGraph = st.view === 'graph', isUpload = st.view === 'upload';
+    const isAnswer = isGraph && st.mode === 'answer';
+    const isExplore = isGraph && st.mode === 'explore';
+    const byId = {}; N.forEach(n => byId[n.id] = n);
+
+    const topicIds = ['exhaust', 'carb', 'ignition', 'port', 'premix', 'cooling', 'deto', 'reed'];
+    const topics = topicIds.map(id => { const n = byId[id]; return { label: n.label, color: C[n.cat], onClick: () => this.askTopic(id) }; });
+
+    const nb = [];
+    E.forEach(([a, b]) => { if (a === sel) nb.push(b); else if (b === sel) nb.push(a); });
+    const related = nb.slice(0, 6).map(id => { const n = byId[id]; return { label: n.label, color: C[n.cat], confLabel: n.conf + '%', onClick: () => this.selectNode(id) }; });
+
+    const a = byId[sel];
+    const webSources = WEB.slice(0, 3).map(w => ({ isWeb: true, isDoc: false, url: w.url, doc: w.source + ' — ' + w.title }));
+    const docSources = a.sources.map(x => ({ isWeb: false, isDoc: true, doc: x.d, page: x.p }));
+    const ans = {
+      query: st.submittedQuery || a.label, label: a.label, cat: L[a.cat], color: C[a.cat],
+      confW: a.conf + '%', updated: a.updated, body: a.blurb,
+      latency: web ? '2.84s' : '1.21s', cost: web ? '0.0094' : '0.0037',
+      modeLabel: web ? 'via Web' : 'via Knowledge base', modeIcon: web ? '◍' : '◆',
+      modeColor: web ? '#3358e0' : '#14a08a', modeBg: web ? '#eef2fd' : '#eafaf6', modeBorder: web ? '#d4dffb' : '#c6ece2',
+      banner: web ? 'Synthesized from live web results — reflects the latest sources, not yet saved to your knowledge base.' : 'Retrieved and synthesized from your knowledge base with citations.',
+      bannerBg: web ? '#f6f8fe' : '#f4faf8', bannerBorder: web ? '#e2e9fb' : '#dcefe8',
+      sourcesLabel: web ? 'WEB SOURCES' : 'SOURCES', sources: web ? webSources : docSources,
+      webChip: web ? 'PRIMARY SOURCE' : '3 NEED REVIEW',
+      webChipColor: web ? '#3358e0' : '#b3791a', webChipBg: web ? '#eef2fd' : '#fdf6e8', webChipBorder: web ? '#d4dffb' : '#f0e2bf'
+    };
+
+    const docs = st.docs.map(d => {
+      const indexed = d.status === 'indexed';
+      return Object.assign({}, d, {
+        ext: this.extOf(d.name), progW: d.prog + '%',
+        progColor: indexed ? '#14a08a' : '#3358e0',
+        statusLabel: indexed ? 'INDEXED' : 'EMBEDDING',
+        statusColor: indexed ? '#14a08a' : '#3358e0',
+        statusBg: indexed ? '#eafaf6' : '#eef2fd', statusBorder: indexed ? '#c6ece2' : '#d4dffb'
+      });
+    });
+    const vsCount = docs.length;
+    const vsChunks = docs.reduce((t, d) => t + (d.status === 'indexed' ? Math.max(40, Math.round(d.name.length * 18)) : 0), 0).toLocaleString();
+    const vsFresh = docs.filter(d => d.status === 'indexed').length;
+
+    const tabActive = c => c ? '#14181f' : '#98a0ac';
+    return {
+      isGraph, isUpload, isAnswer, isExplore,
+      topics, related, ans, webItems: WEB,
+      query: st.query, submittedQuery: st.submittedQuery,
+      placeholder: web ? 'Ask the web about Hirth two-stroke engines…' : 'How does an expansion chamber improve scavenging?',
+      barBorder: web ? '#3358e0' : '#d6dbe4',
+      barRing: web ? '0 0 0 3px rgba(51,88,224,.10)' : '0 0 0 0 transparent',
+      webBtnBg: web ? '#3358e0' : '#f3f5f9', webBtnBorder: web ? '#3358e0' : '#d6dbe4',
+      webBtnColor: web ? '#ffffff' : '#5a626e', webBtnLabel: web ? 'Web · on' : 'Web',
+      reviewOpen: st.reviewOpen, reviewDone: st.reviewDone, reviewEditing: !st.reviewDone, reviewText: st.reviewText,
+      toast: st.toast,
+      docs, vsCount, vsChunks, vsFresh,
+      models: ['4103', '4202', '2301', '3507'],
+      askBg: isGraph ? '#fff' : 'transparent', askColor: isGraph ? '#3358e0' : '#5a626e', askShadow: isGraph ? '0 1px 2px rgba(20,30,60,.10)' : 'none',
+      upBg: isUpload ? '#fff' : 'transparent', upColor: isUpload ? '#3358e0' : '#5a626e', upShadow: isUpload ? '0 1px 2px rgba(20,30,60,.10)' : 'none',
+      graphTabBg: isGraph ? 'rgba(51,88,224,.09)' : 'transparent', graphTabColor: tabActive(isGraph),
+      graphTabBorder: isGraph ? '#3358e0' : '#e1e5ed', graphTabIcon: isGraph ? 'rgba(51,88,224,.12)' : '#ffffff',
+      uploadTabBg: isUpload ? 'rgba(51,88,224,.09)' : 'transparent', uploadTabColor: tabActive(isUpload),
+      uploadTabBorder: isUpload ? '#3358e0' : '#e1e5ed', uploadTabIcon: isUpload ? 'rgba(51,88,224,.12)' : '#ffffff',
+      onQueryInput: this.onQueryInput, onQueryKey: this.onQueryKey, submitQuery: this.submitQuery, askNew: this.askNew, toggleWeb: this.toggleWeb,
+      openReview: this.openReview, closeReview: this.closeReview, onReviewInput: this.onReviewInput, submitReview: this.submitReview,
+      goGraph: this.goGraph, goUpload: this.goUpload, addPlus: this.addPlus, onFiles: this.onFiles
+    };
+  }
+}
+</script>
+</body>
+</html>
