@@ -1,0 +1,8 @@
+id,category,difficulty,source_doc,refused,error,n_retrieved,faithfulness,answer_relevancy,llm_context_precision_with_reference,context_recall,question,response
+en001,factual,easy,Simulation_Modelling.pdf,False,,9,1.0,0.9395,1.0,1.0,What is the formula for calculating Brake Mean Effective Pressure (BMEP) from NIMEP and FMEP?,"The formula for calculating Brake Mean Effective Pressure (BMEP) is:
+
+**bmep = nimep − fmep**
+
+(Source: Page 7 of the provided context.)"
+en002,factual,medium,Simulation_Modelling.pdf,True,,9,0.0,0.0,0.0,1.0,What is the formula for calculating the Excess Air Ratio (EAR)?,I don't have enough information.
+en003,factual,medium,Simulation_Modelling.pdf,False,,9,1.0,0.9909,1.0,1.0,What is the typical time resolution for a 3D Fluid Mechanics + complex chemistry model?,The typical time resolution for a 3D Fluid Mechanics + complex chemistry model is **10 E-9 seconds** (as stated on Page 53 of the context).

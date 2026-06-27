@@ -1,0 +1,629 @@
+{
+  "run": {
+    "timestamp": "2026-06-27 18:18:14",
+    "generation_model": "mistralai/mistral-small-3.2-24b-instruct",
+    "judge_provider": "openrouter",
+    "judge_model": "google/gemini-3.1-flash-lite",
+    "embed_model": "BAAI/bge-m3",
+    "ragas_version": "0.3.2",
+    "top_k": 8,
+    "chunk_size": 1024,
+    "n_questions": 35,
+    "n_errors": 0,
+    "duration_s": 1108.8,
+    "json_file": "ragas_20260627_181814.json"
+  },
+  "aggregate": {
+    "faithfulness": 0.7714,
+    "answer_relevancy": 0.716,
+    "llm_context_precision_with_reference": 0.6924,
+    "context_recall": 0.8857
+  },
+  "by_category": {
+    "factual": {
+      "n": 35,
+      "faithfulness": 0.7714,
+      "answer_relevancy": 0.716,
+      "llm_context_precision_with_reference": 0.6924,
+      "context_recall": 0.8857
+    }
+  },
+  "adversarial_refusal_rate": 0.6,
+  "results": [
+    {
+      "id": "en001",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Simulation_Modelling.pdf",
+      "question": "What is the formula for calculating Brake Mean Effective Pressure (BMEP) from NIMEP and FMEP?",
+      "response": "The formula for calculating Brake Mean Effective Pressure (BMEP) from Net Indicated Mean Effective Pressure (NIMEP) and Friction Mean Effective Pressure (FMEP) is:\n\n**bmep = nimep \u2212 fmep**\n\n(Source: Page 7 of the provided context.)",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9615,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en002",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Simulation_Modelling.pdf",
+      "question": "What is the formula for calculating the Excess Air Ratio (EAR)?",
+      "response": "I don't have enough information.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": true,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 0.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en003",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Simulation_Modelling.pdf",
+      "question": "What is the typical time resolution for a 3D Fluid Mechanics + complex chemistry model?",
+      "response": "The typical time resolution for a 3D Fluid Mechanics + complex chemistry model is **10 E-9 seconds** (as stated on Page 53 of the context).",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9909,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en004",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "FAR33.49.pdf",
+      "question": "According to FAR 33.49, how many hours of operation must an engine be subjected to during the endurance test?",
+      "response": "According to FAR 33.49, an engine must be subjected to a total of **150 hours of operation** during the endurance test.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9927,
+        "llm_context_precision_with_reference": 0.9167,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en005",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "FAR33.49.pdf",
+      "question": "During the endurance test, within what percentage must the engine power and crankshaft rotational speed be kept of the rated values?",
+      "response": "During the endurance test, the engine power and crankshaft rotational speed must be kept within **\u00b13 percent** of the rated values.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8883,
+        "llm_context_precision_with_reference": 0.8333,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en006",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "FAR33.49.pdf",
+      "question": "For engines not incorporating a supercharger, what is the duration of the run consisting of alternate periods of 1 1/2 hours at rated maximum continuous power and 1/2 hour at 75 percent rated maximum continuous power?",
+      "response": "The duration of the run consisting of alternate periods of 1 1/2 hours at rated maximum continuous power and 1/2 hour at 75 percent rated maximum continuous power is **20 hours**.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8964,
+        "llm_context_precision_with_reference": 0.3333,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en007",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Simulation_Modelling.pdf",
+      "question": "What is the computer memory requirement for a 1D phenomenological model?",
+      "response": "The computer memory requirement for a 1D phenomenological model is **MB** (as stated on Page 15 of the context).",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "llm_context_precision_with_reference": 0.6111,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en008",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Simulation_Modelling.pdf",
+      "question": "What does RANS stand for in the context of 3D CFD models?",
+      "response": "RANS stands for **Reynolds-Averaged Navier-Stokes**. It resolves averaged (space & time) turbulent kinetic energy and requires an additional turbulence model. (Source: Page 52 of the context.)",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8073,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en009",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Simulation_Modelling.pdf",
+      "question": "In a 3D CFD model with complex chemistry, how many cells are typically used for the grids?",
+      "response": "The context states that for 3D CFD with complex chemistry, grids typically contain between **10,000 and 1,000,000 cells**.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.967,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en010",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "FAR33.49.pdf",
+      "question": "What is the required oil inlet temperature maintenance margin during the endurance runs at rated take-off power according to FAR 33.49?",
+      "response": "According to FAR 33.49, the oil inlet temperature must be maintained within **\u00b110 degrees Fahrenheit** of the limiting temperature during the endurance runs at rated take-off power.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9487,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de001",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Diplomarbeit Auslegung und Optimierung.pdf",
+      "question": "Von wem wurde der erste nutzbare Zweitaktmotor entwickelt und gebaut?",
+      "response": "Der erste nutzbare Zweitaktmotor wurde von Carl Benz entwickelt und gebaut.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9907,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de002",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Diplomarbeit Auslegung und Optimierung.pdf",
+      "question": "In welchem Jahr wurde das Viertaktprinzip erstmalig von Beau de Rochas erdacht und beschrieben?",
+      "response": "Das Viertaktprinzip wurde erstmals **1862** von Beau de Rochas erdacht und beschrieben.",
+      "n_retrieved": 8,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9888,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de003",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Diplomarbeit Auslegung und Optimierung.pdf",
+      "question": "Welches Mischungsverh\u00e4ltnis von Kraftstoff zu selbstmischendem Zweitaktmotoren\u00f6l wird \u00fcblicherweise beim Zweitaktmotor verwendet?",
+      "response": "Ich habe nicht gen\u00fcgend Informationen.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "id": "de004",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Diplomarbeit Auslegung und Optimierung.pdf",
+      "question": "Welches ist das effektivste Sp\u00fclverfahren bei den vorgestellten Sp\u00fclverfahren f\u00fcr Zweitaktmotoren?",
+      "response": "Das effektivste Sp\u00fclverfahren bei den vorgestellten Sp\u00fclverfahren f\u00fcr Zweitaktmotoren ist die **Gleichstromsp\u00fclung**. Sie erm\u00f6glicht einen guten Sp\u00fclgrad mit nur kleinem Luftdurchsatz und erfordert daher eine geringe Sp\u00fclgebl\u00e4seleistung. Die Gleichstromsp\u00fclung verdr\u00e4ngt die Abgase effektiv, da die Frischladung parallel zur Kolbenbewegungsrichtung str\u00f6mt und nur eine geringe Durchmischung mit Restgasen entsteht.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.966,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de005",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Diplomarbeit Auslegung und Optimierung.pdf",
+      "question": "Wie gro\u00df ist das \u00dcbersetzungsverh\u00e4ltnis zwischen Kurbelwelle und Nockenwelle beim Einsatz von Ventilen im Zweitaktmotor?",
+      "response": "Das \u00dcbersetzungsverh\u00e4ltnis zwischen Kurbelwelle und Nockenwelle beim Einsatz von Ventilen im Zweitaktmotor betr\u00e4gt **1 : 1**.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9879,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de006",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Diplomarbeit Auslegung und Optimierung.pdf",
+      "question": "Welcher Schmierstoff wird \u00fcblicherweise f\u00fcr die Druckumlaufschmierung und Trockensumpfschmierung verwendet?",
+      "response": "F\u00fcr die Druckumlaufschmierung und Trockensumpfschmierung werden \u00d6le mit Viskosit\u00e4tsklassen von **SAE 5W bis SAE 50** verwendet. \u00dcblicherweise kommen **Mehrbereichs\u00f6le** zum Einsatz, die die Viskosit\u00e4tsanforderungen f\u00fcr Sommer- und Wintertemperaturen erf\u00fcllen.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8584,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de007",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Diplomarbeit Auslegung und Optimierung.pdf",
+      "question": "Welcher Kraftstoff wird beim Ottomotor eingesetzt?",
+      "response": "Beim Ottomotor wird Benzin als Kraftstoff eingesetzt, welches zu den Leichtkraftstoffen geh\u00f6rt. Es basiert auf gecracktem Benzol und wird aus Erd\u00f6l gewonnen. Die Klopffestigkeit des Benzins wird durch die Oktanzahl (OZ) bestimmt, wobei die Research-Oktan-Zahl (ROZ) die Einheit f\u00fcr den Oktangehalt an den Zapfs\u00e4ulen ist.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.939,
+        "llm_context_precision_with_reference": 0.6429,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de008",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Diplomarbeit Auslegung und Optimierung.pdf",
+      "question": "Wie hoch ist der Verdichtungsenddruck beim Dieselmotor laut dem direkten Vergleich von Otto- und Dieselmotoren?",
+      "response": "Laut dem direkten Vergleich von Otto- und Dieselmotoren betr\u00e4gt der Verdichtungsenddruck beim Dieselmotor **25 bar bis 65 bar**.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.977,
+        "llm_context_precision_with_reference": 0.6111,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de009",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Fuel_Kraftstoffe_\u00dcbersicht_Daten.xlsx",
+      "question": "Welche Funktion hat der \"Fuel System Icing Inhibitor\" (FSII) im Kerosin?",
+      "response": "Der \"Fuel System Icing Inhibitor\" (FSII) im Kerosin verhindert die Bildung von Eiskristallen im Kraftstoffsystem, die sich bei niedrigen Temperaturen bilden k\u00f6nnen. Ein Beispiel f\u00fcr einen solchen Inhibitor ist Di-Ethylen-Glykol-Mono-Methyl-Ether (DiEGME).",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.977,
+        "llm_context_precision_with_reference": 0.9167,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de010",
+      "category": "factual",
+      "difficulty": "hard",
+      "source_doc": "M\u00f6gliche Werkzeugradien.doc",
+      "question": "Welcher Werkzeugradius entsteht tats\u00e4chlich bei einem 90\u00b0 Winkel, Werkzeugradius R1, Blechst\u00e4rke 2mm und Material 1.4301?",
+      "response": "Ich habe nicht gen\u00fcgend Informationen.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "id": "en011",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Fuel_Kraftstoffe_\u00dcbersicht_Daten.xlsx",
+      "question": "What is the freezing point of JPTS fuel?",
+      "response": "The freezing point of JPTS fuel is **-53 \u00b0C**.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "llm_context_precision_with_reference": 0.6111,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en012",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Fuel_Kraftstoffe_\u00dcbersicht_Daten.xlsx",
+      "question": "Which aircraft exclusively used JP-7 fuel?",
+      "response": "The Lockheed SR-71 exclusively used JP-7 fuel.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.6651,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en013",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Fuel_Kraftstoffe_\u00dcbersicht_Daten.xlsx",
+      "question": "What is the example chemical compound given for a Static Dissipator Additive (SDA)?",
+      "response": "The example chemical compound given for a Static Dissipator Additive (SDA) is **Dinonylnaphthylsulfons\u00e4ure**.",
+      "n_retrieved": 8,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.972,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en014",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Fuel_Kraftstoffe_\u00dcbersicht_Daten.xlsx",
+      "question": "In the comparison of F-34 and F-35, which two additional additives might be present in F-35 (JP-8) that are not listed for F-34?",
+      "response": "According to the context, F-35 (JP-8) might contain two additional additives not listed for F-34 (Jet A-1 with additives):\n1. **Antioxidant** (e.g., Phenyl-alpha-naphthylamin, PAN)\n2. **Metal Deactivator** (e.g., N,N'-disalicylidene-1,2-propanediamin, MDA)\n\nThese are explicitly mentioned under the \"Kerosin_Additive\" and \"Kerosine\" sheets.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8883,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en015",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Berechnung Schallgeschwindigkeit im Auspuff.xlsx",
+      "question": "What is the isentropic exponent (Isentropenexponent) of air (Luft) at 0\u00b0C according to the exhaust gas speed calculation data?",
+      "response": "According to the context, the isentropic exponent (Isentropenexponent) of air (Luft) at 0\u00b0C is **1.4**.\n\n(Source: \"Sheet: Isentropenexponent\" table, row for 0\u00b0C under \"Luft\" column.)",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9077,
+        "llm_context_precision_with_reference": 0.8056,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de011",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Fuel_Kraftstoffe_\u00dcbersicht_Daten.xlsx",
+      "question": "Welcher Zweck wird dem Fuel System Icing Inhibitor (FSII) zugeschrieben?",
+      "response": "Der Fuel System Icing Inhibitor (FSII) verhindert die Bildung von Eiskristallen im Kraftstoffsystem, die sich bei niedrigen Temperaturen bilden k\u00f6nnen.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9794,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de012",
+      "category": "factual",
+      "difficulty": "hard",
+      "source_doc": "M\u00f6gliche Werkzeugradien.doc",
+      "question": "Was ist der tats\u00e4chlich entstehende Radius am Teil bei 90 Winkel, Werkzeugradius R1, Blechst\u00e4rke 1mm und Material 1.4301?",
+      "response": "Ich habe nicht gen\u00fcgend Informationen.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "id": "de013",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Berechnung Schallgeschwindigkeit im Auspuff.xlsx",
+      "question": "Welcher Wert f\u00fcr den Isentropenexponent von CO2 ist bei 100\u00b0C angegeben?",
+      "response": "Der Isentropenexponent von CO\u2082 bei 100\u00b0C betr\u00e4gt **1,281**.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.971,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de014",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Fuel_Kraftstoffe_\u00dcbersicht_Daten.xlsx",
+      "question": "Welche Viskosit\u00e4t wird f\u00fcr das \u00d6l 'Liqui Moly 2T Synth Street Race' bei 100\u00b0C angegeben?",
+      "response": "Die Viskosit\u00e4t von **Liqui Moly 2T Synth Street Race** bei 100\u00b0C betr\u00e4gt **9,1 mm\u00b2/s**.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.953,
+        "llm_context_precision_with_reference": 0.6111,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "de015",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Fuel_Kraftstoffe_\u00dcbersicht_Daten.xlsx",
+      "question": "Welches Spionageflugzeug nutzt laut den generellen Informationen den Treibstoff JPTS?",
+      "response": "Laut den generellen Informationen im Kontext wird der Treibstoff **JPTS** vom Spionageflugzeug **Lockheed U-2** verwendet.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.6912,
+        "llm_context_precision_with_reference": 0.5,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en016",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": null,
+      "question": "What are the four stages of the four stroke cycle as labeled in the basic performance diagram?",
+      "response": "I don't have enough information.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": true,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 0.5179,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en017",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": null,
+      "question": "According to the performance basics equations for reciprocating engines, what is the value of revolutions/cycle for a four stroke engine?",
+      "response": "According to the performance basics equations on Page 7, the value of revolutions/cycle for a four-stroke engine is **2**.\n\nThe relevant equation is:\n\\[ P_b = \\frac{D \\cdot n \\cdot bmep}{2} \\]\nwhere the denominator **2** indicates the number of revolutions per cycle for a four-stroke engine.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8941,
+        "llm_context_precision_with_reference": 0.6792,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "id": "en018",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": null,
+      "question": "What is the capital of France?",
+      "response": "Ich habe nicht gen\u00fcgend Informationen.",
+      "n_retrieved": 8,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 0.3333,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en019",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": null,
+      "question": "Who painted the Mona Lisa?",
+      "response": "I don't have enough information.",
+      "n_retrieved": 8,
+      "error": "",
+      "refused": true,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 0.3095,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "en020",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": null,
+      "question": "What is the largest ocean on Earth?",
+      "response": "I don't have enough information.",
+      "n_retrieved": 8,
+      "error": "",
+      "refused": true,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 0.0,
+        "context_recall": 1.0
+      }
+    }
+  ]
+}

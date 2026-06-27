@@ -1,0 +1,85 @@
+{
+  "run": {
+    "timestamp": "2026-06-27 17:52:03",
+    "generation_model": "mistralai/mistral-small-3.2-24b-instruct",
+    "judge_provider": "gemini",
+    "judge_model": "gemini-2.5-pro",
+    "embed_model": "BAAI/bge-m3",
+    "ragas_version": "0.3.2",
+    "top_k": 8,
+    "chunk_size": 1024,
+    "n_questions": 3,
+    "n_errors": 0,
+    "duration_s": 1027.1,
+    "json_file": "ragas_20260627_175203.json"
+  },
+  "aggregate": {
+    "faithfulness": null,
+    "answer_relevancy": null,
+    "llm_context_precision_with_reference": null,
+    "context_recall": null
+  },
+  "by_category": {
+    "factual": {
+      "n": 3,
+      "faithfulness": null,
+      "answer_relevancy": null,
+      "llm_context_precision_with_reference": null,
+      "context_recall": null
+    }
+  },
+  "adversarial_refusal_rate": null,
+  "results": [
+    {
+      "id": "en001",
+      "category": "factual",
+      "difficulty": "easy",
+      "source_doc": "Simulation_Modelling.pdf",
+      "question": "What is the formula for calculating Brake Mean Effective Pressure (BMEP) from NIMEP and FMEP?",
+      "response": "The formula for calculating Brake Mean Effective Pressure (BMEP) from Net Indicated Mean Effective Pressure (NIMEP) and Friction Mean Effective Pressure (FMEP) is:\n\n**bmep = nimep \u2212 fmep**\n\n(Source: Page 7 of the provided context)",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "llm_context_precision_with_reference": null,
+        "context_recall": null
+      }
+    },
+    {
+      "id": "en002",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Simulation_Modelling.pdf",
+      "question": "What is the formula for calculating the Excess Air Ratio (EAR)?",
+      "response": "I don't have enough information.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": true,
+      "scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "llm_context_precision_with_reference": null,
+        "context_recall": null
+      }
+    },
+    {
+      "id": "en003",
+      "category": "factual",
+      "difficulty": "medium",
+      "source_doc": "Simulation_Modelling.pdf",
+      "question": "What is the typical time resolution for a 3D Fluid Mechanics + complex chemistry model?",
+      "response": "The typical time resolution for a 3D Fluid Mechanics + complex chemistry model is **10 E-9 seconds**.",
+      "n_retrieved": 9,
+      "error": "",
+      "refused": false,
+      "scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "llm_context_precision_with_reference": null,
+        "context_recall": null
+      }
+    }
+  ]
+}

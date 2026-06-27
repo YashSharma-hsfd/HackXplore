@@ -1,0 +1,80 @@
+[project]
+name = "rag-service"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "llama-index-core>=0.12.0",
+    # Embeddings: BGE-M3 (multilingual, local) via HuggingFace + sentence-transformers.
+    "llama-index-embeddings-huggingface>=0.4.0",
+    "sentence-transformers>=3.0.0",
+    # Generation: Mistral Small 3.2 24B via OpenRouter (OpenAI-compatible).
+    "openai>=1.40.0",
+    # Hybrid retrieval: BM25 sparse retriever (fused with dense via RRF).
+    "llama-index-retrievers-bm25>=0.5.0",
+    "llama-index-vector-stores-chroma>=0.4.0",
+    # OCR fallback for scanned PDFs (Gemini Vision).
+    "google-genai>=1.0.0",
+    "google-generativeai>=0.8.0",
+    "chromadb>=0.5.0,<0.6.0",
+    "onnxruntime>=1.14.0,<1.24.0",
+    "redis>=5.0.0",
+    "pydantic-settings>=2.0.0",
+    "python-multipart>=0.0.9",
+    # Multi-format loaders (core/loaders.py): PDF + XLSX + DOCX + URL.
+    "pymupdf>=1.24.0",
+    "pillow>=10.0.0",
+    "pandas>=2.0.0",
+    "openpyxl>=3.1.0",
+    "docx2txt>=0.8",
+    "trafilatura>=1.8.0",
+    # Knowledge graph layer (core/graph.py): networkx on disk.
+    "networkx>=3.1",
+    "sentry-sdk[fastapi]>=2.0.0",
+    "structlog>=24.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.6.0",
+    "black>=24.0.0",
+    "mypy>=1.0.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "httpx>=0.27.0",
+    "ragas>=0.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rag_service"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+# The `eval` suite makes live API calls — exclude it from the default run.
+# Run it explicitly with `pytest -m eval`.
+addopts = ["-m", "not eval"]
+markers = [
+    "eval: live RAGAS regression eval; needs a real GEMINI_API_KEY; excluded from the default run",
+]
