@@ -1,17 +1,15 @@
 import { classifyDomain, domainColor } from '../lib/domains.js'
 
-// "Related domains" card (design handoff §4b) — wired to GET /related.
-// `items` is the backend's related[] array; clicking a row re-queries.
 export default function RelatedDomains({ entity, items, onPick }) {
   return (
-    <div className="card related-card">
-      <div className="card-head">
+    <div className="card related-card" style={{ display: 'flex', flexDirection: 'column', maxHeight: 320 }}>
+      <div className="card-head" style={{ flexShrink: 0 }}>
         <span className="card-title">Related domains</span>
       </div>
-      <div className="related-list">
+      <div className="related-list" style={{ overflowY: 'auto', flex: 1 }}>
         {(!items || items.length === 0) && (
           <div className="empty-state">
-            {entity ? `No linked topics for “${entity}” yet.` : 'Ask a question to see related topics.'}
+            {entity ? `No linked topics for "${entity}" yet.` : 'Ask a question to see related topics.'}
           </div>
         )}
         {items?.map((it) => {

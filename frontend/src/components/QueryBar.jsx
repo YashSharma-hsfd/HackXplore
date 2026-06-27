@@ -1,6 +1,5 @@
 import { GlobeIcon } from './icons.jsx'
 
-// Pinned bottom query bar (design handoff §5).
 export default function QueryBar({
   value,
   onChange,
@@ -8,7 +7,6 @@ export default function QueryBar({
   onClear,
   webMode,
   onToggleWeb,
-  onUpload,
   loading,
   showClear,
 }) {
@@ -20,10 +18,6 @@ export default function QueryBar({
   return (
     <div className="query-bar-wrap">
       <form className={`query-bar${webMode ? ' web-on' : ''}`} onSubmit={submit}>
-        <button type="button" className="qb-btn" title="Upload documents" onClick={onUpload}>
-          +
-        </button>
-
         <button
           type="button"
           className={`qb-web${webMode ? ' on' : ''}`}

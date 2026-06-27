@@ -186,7 +186,6 @@ export default function App() {
               onClear={onClear}
               webMode={webMode}
               onToggleWeb={() => setWebMode((w) => !w)}
-              onUpload={() => setView('upload')}
               loading={loading}
               showClear={phase === 'answer'}
             />

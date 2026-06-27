@@ -56,11 +56,11 @@ export default function AnswerPanel({ result, query, domain, webMode, onReview, 
 
         <h2 className="answer-headline">{headline}</h2>
 
-        <div className={`source-banner ${webMode ? 'web' : 'kb'}`}>
-          {webMode
-            ? 'Synthesised from live web signals — verify before relying on it.'
-            : `Grounded in ${citations.length} internal source${citations.length === 1 ? '' : 's'} from the knowledge base.`}
-        </div>
+        {webMode && (
+          <div className="source-banner web">
+            Synthesised from live web signals — verify before relying on it.
+          </div>
+        )}
 
         {body && <div className="answer-prose">{body}</div>}
 
