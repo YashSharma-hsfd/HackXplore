@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -53,6 +54,8 @@ app.include_router(router)
 # Dockerfile) at "/". Mounted AFTER the API router so /query, /graph, etc. still
 # resolve to the API; everything else falls through to the SPA. Guarded so local
 # dev without a build present just skips it (run the frontend via `vite` then).
-_FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend_dist"
+_FRONTEND_DIST = Path(
+    os.environ.get("FRONTEND_DIST") or Path(__file__).resolve().parents[2] / "frontend_dist"
+)
 if _FRONTEND_DIST.is_dir():
     app.mount("/", StaticFiles(directory=str(_FRONTEND_DIST), html=True), name="frontend")

@@ -84,7 +84,7 @@ class Settings(BaseSettings):
     # isolation) so retrieval spans the whole corpus. See CLAUDE.md §3/§9.
     collection_name: str = "corpus"
     bm25_top_k: int = 15  # sparse candidates
-    fusion_top_k: int = 30  # vector+BM25 RRF candidate pool handed to the reranker
+    fusion_top_k: int = 15  # vector+BM25 RRF candidate pool handed to the reranker (tuned down from 30 for CPU speed)
     reranker_model: str = "BAAI/bge-reranker-v2-m3"  # multilingual cross-encoder (DE/EN), local
     rerank_top_n: int = 8  # kept after rerank → generation context
     graph_store_path: str = "./graph_store/graph.json"  # networkx serialized to disk

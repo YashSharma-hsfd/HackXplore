@@ -46,9 +46,13 @@ COPY --from=builder /app/src /app/src
 COPY chroma_store/ /app/chroma_store/
 COPY graph_store/ /app/graph_store/
 
+# Built React SPA (from the frontend stage) — FastAPI serves this at "/".
+COPY --from=frontend /fe/dist /app/frontend_dist
+
 ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONPATH="/app/src" \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    FRONTEND_DIST="/app/frontend_dist"
 
 RUN useradd -m -u 1000 app && chown -R app:app /app
 USER app
