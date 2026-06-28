@@ -10213,6 +10213,151 @@
       "_id": "ent::temperature difference",
       "label": "temperature difference",
       "kind": "entity"
+    },
+    {
+      "_id": "ent::tool_radius",
+      "label": "tool_radius",
+      "kind": "entity"
+    },
+    {
+      "_id": "spec::tool_radius::r1",
+      "label": "R1: 3000 mm",
+      "kind": "spec",
+      "subject": "tool_radius",
+      "attribute": "R1",
+      "value": "3000",
+      "unit": "mm",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0",
+      "source_doc": "Mögliche Werkzeugradien.docx",
+      "curated": false
+    },
+    {
+      "_id": "spec::tool_radius::r2",
+      "label": "R2: 2000 mm",
+      "kind": "spec",
+      "subject": "tool_radius",
+      "attribute": "R2",
+      "value": "2000",
+      "unit": "mm",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0",
+      "source_doc": "Mögliche Werkzeugradien.docx",
+      "curated": false
+    },
+    {
+      "_id": "spec::tool_radius::r2,5",
+      "label": "R2,5: 3000 mm",
+      "kind": "spec",
+      "subject": "tool_radius",
+      "attribute": "R2,5",
+      "value": "3000",
+      "unit": "mm",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0",
+      "source_doc": "Mögliche Werkzeugradien.docx",
+      "curated": false
+    },
+    {
+      "_id": "spec::tool_radius::r3",
+      "label": "R3: 2000 mm",
+      "kind": "spec",
+      "subject": "tool_radius",
+      "attribute": "R3",
+      "value": "2000",
+      "unit": "mm",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0",
+      "source_doc": "Mögliche Werkzeugradien.docx",
+      "curated": false
+    },
+    {
+      "_id": "spec::tool_radius::r4",
+      "label": "R4: 2000 mm",
+      "kind": "spec",
+      "subject": "tool_radius",
+      "attribute": "R4",
+      "value": "2000",
+      "unit": "mm",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0",
+      "source_doc": "Mögliche Werkzeugradien.docx",
+      "curated": false
+    },
+    {
+      "_id": "spec::tool_radius::r5",
+      "label": "R5: 3000 mm",
+      "kind": "spec",
+      "subject": "tool_radius",
+      "attribute": "R5",
+      "value": "3000",
+      "unit": "mm",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0",
+      "source_doc": "Mögliche Werkzeugradien.docx",
+      "curated": false
+    },
+    {
+      "_id": "spec::tool_radius::r10",
+      "label": "R10: 1000 mm",
+      "kind": "spec",
+      "subject": "tool_radius",
+      "attribute": "R10",
+      "value": "1000",
+      "unit": "mm",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0",
+      "source_doc": "Mögliche Werkzeugradien.docx",
+      "curated": false
+    },
+    {
+      "_id": "spec::tool_radius::r20",
+      "label": "R20: 1000 mm",
+      "kind": "spec",
+      "subject": "tool_radius",
+      "attribute": "R20",
+      "value": "1000",
+      "unit": "mm",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0",
+      "source_doc": "Mögliche Werkzeugradien.docx",
+      "curated": false
+    },
+    {
+      "_id": "ent::resulting_radius",
+      "label": "resulting_radius",
+      "kind": "entity"
+    },
+    {
+      "_id": "spec::resulting_radius::example_1",
+      "label": "example_1: 2 mm",
+      "kind": "spec",
+      "subject": "resulting_radius",
+      "attribute": "example_1",
+      "value": "2",
+      "unit": "mm",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0",
+      "source_doc": "Mögliche Werkzeugradien.docx",
+      "curated": false
+    },
+    {
+      "_id": "spec::resulting_radius::example_2",
+      "label": "example_2: 1.2 mm",
+      "kind": "spec",
+      "subject": "resulting_radius",
+      "attribute": "example_2",
+      "value": "1.2",
+      "unit": "mm",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0",
+      "source_doc": "Mögliche Werkzeugradien.docx",
+      "curated": false
+    },
+    {
+      "_id": "ent::angle",
+      "label": "angle",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::material",
+      "label": "material",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::material_thickness",
+      "label": "material_thickness",
+      "kind": "entity"
     }
   ],
   "edges": [
@@ -19103,6 +19248,110 @@
       "rel": "is proportional to",
       "kind": "relation",
       "source": "206a8386-736a-443d-bdf3-3dd0ffd9906e"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "spec::tool_radius::r1",
+      "_key": "R1",
+      "rel": "R1",
+      "kind": "has_spec",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "spec::tool_radius::r2",
+      "_key": "R2",
+      "rel": "R2",
+      "kind": "has_spec",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "spec::tool_radius::r2,5",
+      "_key": "R2,5",
+      "rel": "R2,5",
+      "kind": "has_spec",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "spec::tool_radius::r3",
+      "_key": "R3",
+      "rel": "R3",
+      "kind": "has_spec",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "spec::tool_radius::r4",
+      "_key": "R4",
+      "rel": "R4",
+      "kind": "has_spec",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "spec::tool_radius::r5",
+      "_key": "R5",
+      "rel": "R5",
+      "kind": "has_spec",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "spec::tool_radius::r10",
+      "_key": "R10",
+      "rel": "R10",
+      "kind": "has_spec",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "spec::tool_radius::r20",
+      "_key": "R20",
+      "rel": "R20",
+      "kind": "has_spec",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "ent::angle",
+      "_key": "depends_on",
+      "rel": "depends_on",
+      "kind": "relation",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "ent::material",
+      "_key": "depends_on",
+      "rel": "depends_on",
+      "kind": "relation",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::tool_radius",
+      "_to": "ent::material_thickness",
+      "_key": "depends_on",
+      "rel": "depends_on",
+      "kind": "relation",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::resulting_radius",
+      "_to": "spec::resulting_radius::example_1",
+      "_key": "example_1",
+      "rel": "example_1",
+      "kind": "has_spec",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
+    },
+    {
+      "_from": "ent::resulting_radius",
+      "_to": "spec::resulting_radius::example_2",
+      "_key": "example_2",
+      "rel": "example_2",
+      "kind": "has_spec",
+      "source": "2cc967d9-7ee7-44c1-b5ef-a5a3d2ef2ff0"
     }
   ]
 }
