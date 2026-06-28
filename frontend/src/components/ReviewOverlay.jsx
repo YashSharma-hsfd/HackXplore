@@ -66,11 +66,6 @@ export default function ReviewOverlay({ result, query, onSubmit, onClose }) {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
-              <div className="action-chips">
-                <span className="action-chip">＋ Cite source</span>
-                <span className="action-chip">📎 Attach document</span>
-                <span className="action-chip">🔗 Link web signal</span>
-              </div>
               <div className="modal-actions">
                 <button className="btn-primary" onClick={submit} disabled={busy || !text.trim()}>
                   {busy ? 'Updating…' : 'Update vector space'}

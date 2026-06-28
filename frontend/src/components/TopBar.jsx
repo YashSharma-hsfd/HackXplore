@@ -23,13 +23,17 @@ function HirthLogo() {
   )
 }
 
-export default function TopBar({ view, onView, stats, online }) {
+export default function TopBar({ view, onView, onHome, stats, corpusStats, online }) {
   return (
     <header className="topbar">
       <div className="topbar-left">
-        <HirthLogo />
-        <div className="topbar-divider" />
-        <div className="topbar-label">KNOWLEDGE ENGINE</div>
+        <button
+          onClick={() => onHome()}
+          style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+          title="Home"
+        >
+          <HirthLogo />
+        </button>
       </div>
 
       <div className="topbar-right">
@@ -44,7 +48,9 @@ export default function TopBar({ view, onView, stats, online }) {
 
         <div className={`vector-status${online ? '' : ' down'}`}>
           <span className="status-dot" />
-          {stats ? `${stats.specs} specs · ${stats.nodes} vectors` : online ? 'connected' : 'offline'}
+          {corpusStats
+            ? `${corpusStats.document_count} docs · ${corpusStats.chunk_count} chunks · ${stats?.specs ?? 0} specs`
+            : online ? 'connected' : 'offline'}
         </div>
 
         <div className="avatar">HE</div>

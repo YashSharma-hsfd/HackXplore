@@ -42,7 +42,6 @@ export default function AskView({
           <AnswerPanel
             result={result}
             query={query}
-            domain={domain}
             webMode={webMode}
             onReview={onReview}
             onEditFact={onEditFact}

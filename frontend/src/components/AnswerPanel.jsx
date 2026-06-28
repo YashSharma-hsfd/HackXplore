@@ -1,12 +1,4 @@
 import FactChip from './FactChip.jsx'
-import { domainColor, domainLabel } from '../lib/domains.js'
-
-// Derives a short headline from the answer text: first sentence, capped.
-function headlineOf(answer) {
-  if (!answer) return ''
-  const first = answer.split(/(?<=[.?!])\s/)[0] || answer
-  return first.length > 120 ? first.slice(0, 117).trimEnd() + '…' : first
-}
 
 function fmtCost(usd) {
   if (usd == null) return '≈ $0'
@@ -14,11 +6,35 @@ function fmtCost(usd) {
   return `$${usd.toFixed(usd < 0.01 ? 5 : 4)}`
 }
 
-export default function AnswerPanel({ result, query, domain, webMode, onReview, onEditFact }) {
+// Returns true when the LLM admitted it couldn't answer.
+const NO_INFO_PHRASES = [
+  "i don't have enough information",
+  "ich habe nicht genügend informationen",
+  "not enough information",
+  "keine ausreichenden informationen",
+]
+function isNoInfo(answer) {
+  const lower = (answer || '').toLowerCase()
+  return NO_INFO_PHRASES.some((p) => lower.includes(p))
+}
+
+// Deduplicate citations by source filename — keep the highest-score chunk per source.
+function dedupeCitations(citations) {
+  const seen = new Map()
+  for (const c of citations) {
+    const key = c.source || c.chunk_id
+    const prev = seen.get(key)
+    if (!prev || (c.score || 0) > (prev.score || 0)) {
+      seen.set(key, c)
+    }
+  }
+  return Array.from(seen.values())
+}
+
+export default function AnswerPanel({ result, query, webMode, onReview, onEditFact }) {
   const { answer, citations = [], facts = [], latency_ms, cost_usd } = result
-  const headline = headlineOf(answer)
-  const body = answer.length > headline.length ? answer.slice(headline.length).trim() : ''
-  const color = domainColor(domain)
+  const noInfo = isNoInfo(answer)
+  const dedupedCitations = dedupeCitations(citations)
 
   return (
     <div className="card answer-card">
@@ -46,23 +62,13 @@ export default function AnswerPanel({ result, query, domain, webMode, onReview, 
       </div>
 
       <div className="answer-body">
-        <div className="answer-meta">
-          <span className="domain-tag" style={{ color }}>
-            <span className="dot" style={{ background: color }} />
-            {domainLabel(domain)}
-          </span>
-          <span className="updated-date">updated {new Date().toLocaleDateString()}</span>
-        </div>
-
-        <h2 className="answer-headline">{headline}</h2>
-
         {webMode && (
           <div className="source-banner web">
             Synthesised from live web signals — verify before relying on it.
           </div>
         )}
 
-        {body && <div className="answer-prose">{body}</div>}
+        {answer && <div className="answer-prose">{answer}</div>}
 
         {facts.length > 0 && (
           <>
@@ -75,18 +81,23 @@ export default function AnswerPanel({ result, query, domain, webMode, onReview, 
           </>
         )}
 
-        <div className="section-label">SOURCES</div>
-        {citations.length === 0 && <div className="src-meta">No sources cited.</div>}
-        {citations.map((c) => (
-          <div className="source-row" key={c.chunk_id}>
-            <span className="src-badge">{(c.source || '').split('.').pop()?.toUpperCase()?.slice(0, 4) || 'DOC'}</span>
-            <div className="src-main">
-              <div className="src-name">{c.title || c.source || 'source'}</div>
-              {c.snippet && <div className="src-snippet">{c.snippet}</div>}
-              <div className="src-meta">{c.source}</div>
-            </div>
-          </div>
-        ))}
+        {!noInfo && dedupedCitations.length > 0 && (
+          <>
+            <div className="section-label">SOURCES</div>
+            {dedupedCitations.map((c) => (
+              <div className="source-row" key={c.chunk_id}>
+                <span className="src-badge">
+                  {(c.source || '').split('.').pop()?.toUpperCase()?.slice(0, 4) || 'DOC'}
+                </span>
+                <div className="src-main">
+                  <div className="src-name">{c.title || c.source || 'source'}</div>
+                  {c.snippet && <div className="src-snippet">{c.snippet}</div>}
+                  <div className="src-meta">{c.source}</div>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
       </div>
     </div>
   )

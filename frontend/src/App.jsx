@@ -159,7 +159,14 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <TopBar view={view} onView={setView} stats={graphStats} online={online} />
+      <TopBar
+          view={view}
+          onView={setView}
+          onHome={() => { setView('ask'); onClear() }}
+          stats={graphStats}
+          corpusStats={corpusStats}
+          online={online}
+        />
 
       <div className="app-body">
         {view === 'ask' ? (

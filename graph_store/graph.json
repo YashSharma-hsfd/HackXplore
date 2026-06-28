@@ -9787,6 +9787,408 @@
       "_id": "ent::averaged turbulent kinetic energy",
       "label": "averaged turbulent kinetic energy",
       "kind": "entity"
+    },
+    {
+      "_id": "spec::engine::max_power",
+      "label": "max_power: 120 kW",
+      "kind": "spec",
+      "subject": "engine",
+      "attribute": "max_power",
+      "value": "120",
+      "unit": "kW",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::engine::max_power_rpm",
+      "label": "max_power_rpm: 4000 rpm",
+      "kind": "spec",
+      "subject": "engine",
+      "attribute": "max_power_rpm",
+      "value": "4000",
+      "unit": "rpm",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::engine::max_torque",
+      "label": "max_torque: 350 Nm",
+      "kind": "spec",
+      "subject": "engine",
+      "attribute": "max_torque",
+      "value": "350",
+      "unit": "Nm",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::engine::max_torque_rpm",
+      "label": "max_torque_rpm: 1600-2400 rpm",
+      "kind": "spec",
+      "subject": "engine",
+      "attribute": "max_torque_rpm",
+      "value": "1600-2400",
+      "unit": "rpm",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::cylinder::compression_ratio",
+      "label": "compression_ratio: 16.5",
+      "kind": "spec",
+      "subject": "cylinder",
+      "attribute": "compression_ratio",
+      "value": "16.5",
+      "unit": "",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::cylinder::peak_pressure",
+      "label": "peak_pressure: 180 bar",
+      "kind": "spec",
+      "subject": "cylinder",
+      "attribute": "peak_pressure",
+      "value": "180",
+      "unit": "bar",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "ent::combustion_chamber",
+      "label": "combustion_chamber",
+      "kind": "entity"
+    },
+    {
+      "_id": "spec::combustion_chamber::heat_transfer_multiplier",
+      "label": "heat_transfer_multiplier: 0.2-1",
+      "kind": "spec",
+      "subject": "combustion_chamber",
+      "attribute": "heat_transfer_multiplier",
+      "value": "0.2-1",
+      "unit": "",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::exhaust::temperature_increase",
+      "label": "temperature_increase: 20 K",
+      "kind": "spec",
+      "subject": "exhaust",
+      "attribute": "temperature_increase",
+      "value": "20",
+      "unit": "K",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::exhaust::temperature_increase_torque",
+      "label": "temperature_increase_torque: 50 K",
+      "kind": "spec",
+      "subject": "exhaust",
+      "attribute": "temperature_increase_torque",
+      "value": "50",
+      "unit": "K",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "ent::combustion_chamber_isolation",
+      "label": "combustion_chamber_isolation",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::in-cylinder_heat_transfer",
+      "label": "in-cylinder_heat_transfer",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::exhaust_energy",
+      "label": "exhaust_energy",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::brake_efficiency",
+      "label": "brake_efficiency",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::exhaust_temperatures",
+      "label": "exhaust_temperatures",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::higher_exhaust_temperatures",
+      "label": "higher_exhaust_temperatures",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::exhaust_volume_flows",
+      "label": "exhaust_volume_flows",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::turbine_rack_attack_angle",
+      "label": "turbine_rack_attack_angle",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::back_pressure_before_turbine",
+      "label": "back_pressure_before_turbine",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::heat transfer",
+      "label": "heat transfer",
+      "kind": "entity"
+    },
+    {
+      "_id": "spec::heat transfer::reduction potential",
+      "label": "reduction potential: 75 %",
+      "kind": "spec",
+      "subject": "heat transfer",
+      "attribute": "reduction potential",
+      "value": "75",
+      "unit": "%",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "ent::heat transfer multiplier",
+      "label": "heat transfer multiplier",
+      "kind": "entity"
+    },
+    {
+      "_id": "spec::heat transfer multiplier::value",
+      "label": "value: 0.25",
+      "kind": "spec",
+      "subject": "heat transfer multiplier",
+      "attribute": "value",
+      "value": "0.25",
+      "unit": "",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::piston stroke::partial stroke",
+      "label": "partial stroke: 38.5 mm",
+      "kind": "spec",
+      "subject": "piston stroke",
+      "attribute": "partial stroke",
+      "value": "38.5",
+      "unit": "mm",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::piston stroke::percentage of complete stroke",
+      "label": "percentage of complete stroke: 40.3 %",
+      "kind": "spec",
+      "subject": "piston stroke",
+      "attribute": "percentage of complete stroke",
+      "value": "40.3",
+      "unit": "%",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "ent::cylinder wall area",
+      "label": "cylinder wall area",
+      "kind": "entity"
+    },
+    {
+      "_id": "spec::cylinder wall area::liner wall area percentage",
+      "label": "liner wall area percentage: 48.7 %",
+      "kind": "spec",
+      "subject": "cylinder wall area",
+      "attribute": "liner wall area percentage",
+      "value": "48.7",
+      "unit": "%",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::heat transfer multiplier::corrected value",
+      "label": "corrected value: 0.61525",
+      "kind": "spec",
+      "subject": "heat transfer multiplier",
+      "attribute": "corrected value",
+      "value": "0.61525",
+      "unit": "",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "ent::isolation phase",
+      "label": "isolation phase",
+      "kind": "entity"
+    },
+    {
+      "_id": "spec::isolation phase::start angle",
+      "label": "start angle: -30 °CA",
+      "kind": "spec",
+      "subject": "isolation phase",
+      "attribute": "start angle",
+      "value": "-30",
+      "unit": "°CA",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::isolation phase::end angle",
+      "label": "end angle: 60 °CA",
+      "kind": "spec",
+      "subject": "isolation phase",
+      "attribute": "end angle",
+      "value": "60",
+      "unit": "°CA",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "spec::heat transfer::corrected reduction",
+      "label": "corrected reduction: 38.475 %",
+      "kind": "spec",
+      "subject": "heat transfer",
+      "attribute": "corrected reduction",
+      "value": "38.475",
+      "unit": "%",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "ent::lower back pressures",
+      "label": "lower back pressures",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::pumping losses",
+      "label": "pumping losses",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::lower in-cylinder heat transfer",
+      "label": "lower in-cylinder heat transfer",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::required indicated mean effective pressure",
+      "label": "required indicated mean effective pressure",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::reduced indicated mean effective pressure",
+      "label": "reduced indicated mean effective pressure",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::injected fuel mass",
+      "label": "injected fuel mass",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::reduced injected fuel mass",
+      "label": "reduced injected fuel mass",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::bsfc",
+      "label": "BSFC",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::heat transfer reduction",
+      "label": "heat transfer reduction",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::heat transfer multiplier (htm)",
+      "label": "heat transfer multiplier (HTM)",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::liner wall temperature",
+      "label": "liner wall temperature",
+      "kind": "entity"
+    },
+    {
+      "_id": "spec::liner wall temperature::difference",
+      "label": "difference: 100 K",
+      "kind": "spec",
+      "subject": "liner wall temperature",
+      "attribute": "difference",
+      "value": "100",
+      "unit": "K",
+      "source": "0e5ea9f7-e6bb-4325-b40d-9800d94707a5",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "ent::piston wall temperature",
+      "label": "piston wall temperature",
+      "kind": "entity"
+    },
+    {
+      "_id": "spec::piston wall temperature::difference",
+      "label": "difference: 50 K",
+      "kind": "spec",
+      "subject": "piston wall temperature",
+      "attribute": "difference",
+      "value": "50",
+      "unit": "K",
+      "source": "0e5ea9f7-e6bb-4325-b40d-9800d94707a5",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "ent::wall temperature",
+      "label": "wall temperature",
+      "kind": "entity"
+    },
+    {
+      "_id": "spec::wall temperature::htm correction",
+      "label": "HTM correction: 0.61525",
+      "kind": "spec",
+      "subject": "wall temperature",
+      "attribute": "HTM correction",
+      "value": "0.61525",
+      "unit": "",
+      "source": "0e5ea9f7-e6bb-4325-b40d-9800d94707a5",
+      "source_doc": "2015-10-01_Isolated_combustion_chamber.pdf",
+      "curated": false
+    },
+    {
+      "_id": "ent::head wall temperature",
+      "label": "head wall temperature",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::heat loss",
+      "label": "heat loss",
+      "kind": "entity"
+    },
+    {
+      "_id": "ent::temperature difference",
+      "label": "temperature difference",
+      "kind": "entity"
     }
   ],
   "edges": [
@@ -11367,6 +11769,38 @@
       "source": "4cac9183-d8e7-43a0-8d0b-f32205b8c3ef"
     },
     {
+      "_from": "ent::engine",
+      "_to": "spec::engine::max_power",
+      "_key": "max_power",
+      "rel": "max_power",
+      "kind": "has_spec",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::engine",
+      "_to": "spec::engine::max_power_rpm",
+      "_key": "max_power_rpm",
+      "rel": "max_power_rpm",
+      "kind": "has_spec",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::engine",
+      "_to": "spec::engine::max_torque",
+      "_key": "max_torque",
+      "rel": "max_torque",
+      "kind": "has_spec",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::engine",
+      "_to": "spec::engine::max_torque_rpm",
+      "_key": "max_torque_rpm",
+      "rel": "max_torque_rpm",
+      "kind": "has_spec",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
       "_from": "ent::working cylinder",
       "_to": "spec::working cylinder::inlet valves",
       "_key": "inlet valves",
@@ -12943,6 +13377,22 @@
       "source": "428b8ecc-54a8-4389-abda-15d4fcfdb02b"
     },
     {
+      "_from": "ent::cylinder",
+      "_to": "spec::cylinder::compression_ratio",
+      "_key": "compression_ratio",
+      "rel": "compression_ratio",
+      "kind": "has_spec",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::cylinder",
+      "_to": "spec::cylinder::peak_pressure",
+      "_key": "peak_pressure",
+      "rel": "peak_pressure",
+      "kind": "has_spec",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
       "_from": "ent::piston",
       "_to": "spec::piston::stroke",
       "_key": "stroke",
@@ -13093,6 +13543,22 @@
       "rel": "temperature",
       "kind": "has_spec",
       "source": "236132db-b4a9-41e8-952e-eca71f276671"
+    },
+    {
+      "_from": "ent::exhaust",
+      "_to": "spec::exhaust::temperature_increase",
+      "_key": "temperature_increase",
+      "rel": "temperature_increase",
+      "kind": "has_spec",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::exhaust",
+      "_to": "spec::exhaust::temperature_increase_torque",
+      "_key": "temperature_increase_torque",
+      "rel": "temperature_increase_torque",
+      "kind": "has_spec",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
     },
     {
       "_from": "ent::compression_ratio",
@@ -14573,6 +15039,22 @@
       "rel": "begin of charging",
       "kind": "has_spec",
       "source": "3e4dab61-5625-4088-9711-dd3d5b1558ce"
+    },
+    {
+      "_from": "ent::piston stroke",
+      "_to": "spec::piston stroke::partial stroke",
+      "_key": "partial stroke",
+      "rel": "partial stroke",
+      "kind": "has_spec",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::piston stroke",
+      "_to": "spec::piston stroke::percentage of complete stroke",
+      "_key": "percentage of complete stroke",
+      "rel": "percentage of complete stroke",
+      "kind": "has_spec",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
     },
     {
       "_from": "ent::piston position",
@@ -18349,6 +18831,222 @@
       "rel": "resolves",
       "kind": "relation",
       "source": "235d662b-3243-4725-9c2c-c1c3b98ea5bc"
+    },
+    {
+      "_from": "ent::combustion_chamber",
+      "_to": "spec::combustion_chamber::heat_transfer_multiplier",
+      "_key": "heat_transfer_multiplier",
+      "rel": "heat_transfer_multiplier",
+      "kind": "has_spec",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::combustion_chamber_isolation",
+      "_to": "ent::in-cylinder_heat_transfer",
+      "_key": "reduces",
+      "rel": "reduces",
+      "kind": "relation",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::combustion_chamber_isolation",
+      "_to": "ent::exhaust_energy",
+      "_key": "increases",
+      "rel": "increases",
+      "kind": "relation",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::combustion_chamber_isolation",
+      "_to": "ent::brake_efficiency",
+      "_key": "increases",
+      "rel": "increases",
+      "kind": "relation",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::combustion_chamber_isolation",
+      "_to": "ent::exhaust_temperatures",
+      "_key": "increases",
+      "rel": "increases",
+      "kind": "relation",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::higher_exhaust_temperatures",
+      "_to": "ent::exhaust_volume_flows",
+      "_key": "increases",
+      "rel": "increases",
+      "kind": "relation",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::higher_exhaust_temperatures",
+      "_to": "ent::turbine_rack_attack_angle",
+      "_key": "reduces",
+      "rel": "reduces",
+      "kind": "relation",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::higher_exhaust_temperatures",
+      "_to": "ent::back_pressure_before_turbine",
+      "_key": "reduces",
+      "rel": "reduces",
+      "kind": "relation",
+      "source": "b6d9a9c4-2249-4bbc-8f6b-c7c2639f3729"
+    },
+    {
+      "_from": "ent::heat transfer",
+      "_to": "spec::heat transfer::reduction potential",
+      "_key": "reduction potential",
+      "rel": "reduction potential",
+      "kind": "has_spec",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::heat transfer",
+      "_to": "spec::heat transfer::corrected reduction",
+      "_key": "corrected reduction",
+      "rel": "corrected reduction",
+      "kind": "has_spec",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::heat transfer multiplier",
+      "_to": "spec::heat transfer multiplier::value",
+      "_key": "value",
+      "rel": "value",
+      "kind": "has_spec",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::heat transfer multiplier",
+      "_to": "spec::heat transfer multiplier::corrected value",
+      "_key": "corrected value",
+      "rel": "corrected value",
+      "kind": "has_spec",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::cylinder wall area",
+      "_to": "spec::cylinder wall area::liner wall area percentage",
+      "_key": "liner wall area percentage",
+      "rel": "liner wall area percentage",
+      "kind": "has_spec",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::isolation phase",
+      "_to": "spec::isolation phase::start angle",
+      "_key": "start angle",
+      "rel": "start angle",
+      "kind": "has_spec",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::isolation phase",
+      "_to": "spec::isolation phase::end angle",
+      "_key": "end angle",
+      "rel": "end angle",
+      "kind": "has_spec",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::isolation phase",
+      "_to": "ent::heat transfer reduction",
+      "_key": "affects",
+      "rel": "affects",
+      "kind": "relation",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::lower back pressures",
+      "_to": "ent::pumping losses",
+      "_key": "reduces",
+      "rel": "reduces",
+      "kind": "relation",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::lower in-cylinder heat transfer",
+      "_to": "ent::required indicated mean effective pressure",
+      "_key": "reduces",
+      "rel": "reduces",
+      "kind": "relation",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::reduced indicated mean effective pressure",
+      "_to": "ent::injected fuel mass",
+      "_key": "reduces",
+      "rel": "reduces",
+      "kind": "relation",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::reduced injected fuel mass",
+      "_to": "ent::bsfc",
+      "_key": "reduces",
+      "rel": "reduces",
+      "kind": "relation",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::heat transfer reduction",
+      "_to": "ent::heat transfer multiplier (htm)",
+      "_key": "corresponds to",
+      "rel": "corresponds to",
+      "kind": "relation",
+      "source": "5a0dc52b-65fc-4a65-92e6-2d1d181d131b"
+    },
+    {
+      "_from": "ent::liner wall temperature",
+      "_to": "spec::liner wall temperature::difference",
+      "_key": "difference",
+      "rel": "difference",
+      "kind": "has_spec",
+      "source": "0e5ea9f7-e6bb-4325-b40d-9800d94707a5"
+    },
+    {
+      "_from": "ent::liner wall temperature",
+      "_to": "ent::piston wall temperature",
+      "_key": "is lower than",
+      "rel": "is lower than",
+      "kind": "relation",
+      "source": "0e5ea9f7-e6bb-4325-b40d-9800d94707a5"
+    },
+    {
+      "_from": "ent::liner wall temperature",
+      "_to": "ent::head wall temperature",
+      "_key": "is lower than",
+      "rel": "is lower than",
+      "kind": "relation",
+      "source": "0e5ea9f7-e6bb-4325-b40d-9800d94707a5"
+    },
+    {
+      "_from": "ent::piston wall temperature",
+      "_to": "spec::piston wall temperature::difference",
+      "_key": "difference",
+      "rel": "difference",
+      "kind": "has_spec",
+      "source": "0e5ea9f7-e6bb-4325-b40d-9800d94707a5"
+    },
+    {
+      "_from": "ent::wall temperature",
+      "_to": "spec::wall temperature::htm correction",
+      "_key": "HTM correction",
+      "rel": "HTM correction",
+      "kind": "has_spec",
+      "source": "0e5ea9f7-e6bb-4325-b40d-9800d94707a5"
+    },
+    {
+      "_from": "ent::heat loss",
+      "_to": "ent::temperature difference",
+      "_key": "is proportional to",
+      "rel": "is proportional to",
+      "kind": "relation",
+      "source": "0e5ea9f7-e6bb-4325-b40d-9800d94707a5"
     }
   ]
 }
