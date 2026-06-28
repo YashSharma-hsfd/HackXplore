@@ -1,13 +1,3 @@
----
-title: Two-Stroke Knowledge DB
-emoji: 🏍️
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-app_port: 8000
-pinned: false
----
-
 # HackXplore
 repo for hackathon, building solution using RAG's 
 ## Problem Statement 
@@ -28,3 +18,28 @@ Use of real-world data sources (e.g. forums, manuals, datasets)
 Intelligent tagging, categorisation or knowledge graphs
 Personalisation or machine learning systems
 The focus is on creativity, technical feasibility and a clearly recognisable benefit for users. The solution should demonstrate how it can be implemented in practice and further developed in the long term.
+## Suggested Solution
+A enterprise-grade Retrieval-Augmented Generation (RAG) solution. This engine combines **GraphRAG** (for deep context and relationship mapping) with **Hybrid Search** to deliver exceptionally accurate, grounded, and context-aware responses from a centralized knowledge base.
+
+---
+
+## Architecture & Core Stack
+
+###  Backend & AI Pipeline
+* **Data Ingestion & OCR:** `Google Gemini 2.5 Flash` — Parses complex layouts, multi-column documents, tables, and images into structured data.
+* **Embeddings & Retrieval:** `BGE-M3` — Executes native hybrid search by unifying dense semantic vector retrieval and sparse lexical matching.
+* **Knowledge Base Architecture:** `Knowledge Graph + Vector Store` — Structures data points globally to surface interconnected concepts across separate documents.
+* **Core Language Model (LLM):** `Mistral Small 3.2 (24B)` — Handles complex reasoning, synthesis, and final answer generation.
+* **Guardrails & Evaluation:** `Gemini 3.1 Flash Lite (LLM Judge)` — Evaluates outputs in real-time for groundedness, context relevance, and hallucination prevention.
+
+###  Frontend
+* **UI Framework:** `React` with `Vite` — Provides a lightning-fast, reactive, and fluid user interface supporting streaming text responses.
+
+---
+
+##  Key Features
+
+* **Multi-Format Ingestion:** Seamlessly process and extract data from multiple file types (PDFs, Images, DOCX, TXT, etc.) into the centralized knowledge base.
+* **Graph-Powered Insights:** Beyond traditional chunk-based RAG, our GraphRAG layer maps entity relationships, allowing the system to answer complex "global" queries across the entire database.
+* **Live Database Synchronization:** Features an active update pipeline to keep the underlying knowledge base completely in sync with your team's live developments.
+* **Hybrid Web Grounding:** Dynamically fetches live web information when necessary to prevent data obsolescence, automatically flagging and separating web-sourced content in the UI for maximum transparency.
